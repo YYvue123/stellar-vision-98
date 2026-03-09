@@ -60,7 +60,8 @@ export const ExploreCards = ({ onPlay, onCreateFrom, currentTrack, isPlaying }: 
                     alt={track.title}
                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
-                  <div className={`absolute inset-0 flex items-end justify-end p-2 gap-1.5 transition-opacity duration-200 ${
+                  {/* Desktop: buttons on image */}
+                  <div className={`hidden sm:flex absolute inset-0 items-end justify-end p-2 gap-1.5 transition-opacity duration-200 ${
                     active ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                   }`}>
                     <button
@@ -75,9 +76,24 @@ export const ExploreCards = ({ onPlay, onCreateFrom, currentTrack, isPlaying }: 
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col justify-center sm:block">
-                  <p className="sm:mt-2 text-sm font-medium text-title truncate">{track.title}</p>
-                  <p className="text-xs text-body-caption">{track.genre}</p>
+                <div className="flex flex-1 items-center justify-between sm:block min-w-0">
+                  <div className="min-w-0">
+                    <p className="sm:mt-2 text-sm font-medium text-title truncate">{track.title}</p>
+                    <p className="text-xs text-body-caption">{track.genre}</p>
+                  </div>
+                  {/* Mobile: buttons next to title */}
+                  <div className="flex sm:hidden items-center gap-1.5 flex-shrink-0 ml-2">
+                    <button
+                      onClick={(e) => { e.stopPropagation(); onCreateFrom(track); }}
+                      className="flex h-7 w-7 items-center justify-center rounded-full border border-border/60 text-body-secondary hover:bg-hover-bg transition-colors"
+                      title="创作你自己的歌曲"
+                    >
+                      <Wand2 className="h-3.5 w-3.5" />
+                    </button>
+                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                      {active ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5 ml-0.5" />}
+                    </div>
+                  </div>
                 </div>
               </div>
             );

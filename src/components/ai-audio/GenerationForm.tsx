@@ -91,7 +91,7 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
         </div>
 
         {/* Textarea */}
-        <div className="rounded-lg border border-border/40 bg-card-secondary p-3">
+        <div className="rounded-lg border border-border/40 bg-card-secondary p-3 input-area-focus">
           <textarea
             value={textInput}
             onChange={(e) => {

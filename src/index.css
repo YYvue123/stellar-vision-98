@@ -171,6 +171,19 @@
   display: none;
 }
 
+/* Focus-within style for input areas */
+.input-area-focus {
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.input-area-focus:focus-within {
+  background-color: hsl(0 0% 100%);
+  border-color: hsl(var(--theme-purple));
+}
+.dark .input-area-focus:focus-within {
+  background-color: hsl(240 5% 26%);
+  border-color: hsl(var(--theme-purple));
+}
+
 /* Thin scrollbar for lyrics */
 .lyrics-scroll {
   scrollbar-width: thin;

@@ -61,8 +61,12 @@ const AIAudio = () => {
       genre: track.genre,
       cover: track.cover,
     };
-    setCurrentTrack(playerTrack);
-    setIsPlaying(true);
+    if (currentTrack?.id === track.id) {
+      setIsPlaying(!isPlaying);
+    } else {
+      setCurrentTrack(playerTrack);
+      setIsPlaying(true);
+    }
   };
 
   const handleHistorySelect = (track: HistoryTrack) => {

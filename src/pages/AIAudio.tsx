@@ -200,7 +200,7 @@ const AIAudio = () => {
           {/* Right column */}
           <div className="flex flex-1 flex-col overflow-y-auto p-4 md:p-6">
             {(isGenerating || detailTrack) ? (
-              <div className="w-full max-w-[1056px] mx-auto">
+              <div className="w-full max-w-[1056px] mx-auto flex flex-1 flex-col">
                 <TrackDetail
                   track={detailTrack}
                   isGenerating={isGenerating}
@@ -208,6 +208,10 @@ const AIAudio = () => {
                   onPlay={handleDetailPlay}
                   onEdit={() => detailTrack && handleEdit(detailTrack)}
                   onDownload={() => detailTrack && handleDownload(detailTrack)}
+                  onBackgroundGenerate={() => {
+                    setIsGenerating(false);
+                    setDetailTrack(null);
+                  }}
                 />
               </div>
             ) : (

@@ -1,4 +1,4 @@
-import { Play, Pause, Pencil, Download, Loader2 } from "lucide-react";
+import { Play, Pause, Pencil, Download, Music, Headphones, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export interface TrackDetailData {
@@ -18,6 +18,7 @@ interface Props {
   onPlay: () => void;
   onEdit: () => void;
   onDownload: () => void;
+  onBackgroundGenerate?: () => void;
 }
 
 const MOCK_LYRICS = `在城市的霓虹灯下
@@ -37,12 +38,19 @@ const MOCK_LYRICS = `在城市的霓虹灯下
 在下一个路口转弯
 会不会遇见新的晴天`;
 
-export const TrackDetail = ({ track, isGenerating, isPlaying, onPlay, onEdit, onDownload }: Props) => {
+export const TrackDetail = ({ track, isGenerating, isPlaying, onPlay, onEdit, onDownload, onBackgroundGenerate }: Props) => {
   if (isGenerating) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 gap-4">
-        <Loader2 className="h-10 w-10 animate-spin text-primary" />
-        <p className="text-sm text-body-secondary">正在生成中，请稍候...</p>
+      <div className="flex flex-1 flex-col items-center justify-center gap-5">
+        <Music className="h-16 w-16 text-primary/30" strokeWidth={1.5} />
+        <p className="text-sm text-body-secondary flex items-center gap-1.5">
+          音乐正在酝酿中，大约 2 分钟后精彩呈现！
+          <Headphones className="h-4 w-4 text-body-caption" />
+        </p>
+        <Button variant="gradient" className="gap-2 mt-2" onClick={onBackgroundGenerate}>
+          <Monitor className="h-4 w-4" />
+          在后台生成
+        </Button>
       </div>
     );
   }
@@ -53,7 +61,6 @@ export const TrackDetail = ({ track, isGenerating, isPlaying, onPlay, onEdit, on
 
   return (
     <div className="space-y-5">
-      {/* Top: Title + actions */}
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold text-title truncate">{track.title}</h2>
         <div className="flex items-center gap-2 flex-shrink-0">
@@ -68,7 +75,6 @@ export const TrackDetail = ({ track, isGenerating, isPlaying, onPlay, onEdit, on
         </div>
       </div>
 
-      {/* Cover + info */}
       <div className="rounded-xl border border-border/40 bg-card p-5">
         <div className="flex items-start gap-4">
           <div
@@ -82,21 +88,15 @@ export const TrackDetail = ({ track, isGenerating, isPlaying, onPlay, onEdit, on
               </div>
             </div>
           </div>
-
           <div className="flex-1 min-w-0">
             <h3 className="text-base font-semibold text-title truncate">{track.title}</h3>
-            {track.artist && (
-              <p className="text-sm text-primary mt-0.5">{track.artist}</p>
-            )}
-            {track.duration && (
-              <p className="text-sm text-body-secondary mt-1">{track.duration}</p>
-            )}
+            {track.artist && <p className="text-sm text-primary mt-0.5">{track.artist}</p>}
+            {track.duration && <p className="text-sm text-body-secondary mt-1">{track.duration}</p>}
             <p className="text-sm text-body-caption mt-1 truncate">{track.genre}</p>
           </div>
         </div>
       </div>
 
-      {/* Lyrics */}
       <div className="rounded-xl border border-border/40 bg-card p-5">
         <h3 className="text-sm font-semibold text-title mb-3">歌词</h3>
         <pre className="text-sm text-body-secondary whitespace-pre-wrap font-sans leading-relaxed">

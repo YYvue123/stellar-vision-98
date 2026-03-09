@@ -103,13 +103,15 @@
   }
 }
 
-/* Hide scrollbar on mobile main container, show on desktop panels */
-.scrollbar-mobile {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.scrollbar-mobile::-webkit-scrollbar {
-  display: none;
+/* Hide scrollbar on mobile main container only */
+@media (max-width: 1023px) {
+  .scrollbar-mobile {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-mobile::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Desktop thin scrollbar utility */

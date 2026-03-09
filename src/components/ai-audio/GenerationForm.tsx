@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Sparkles, Loader2, X } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface Props {
   styleInput: string;
@@ -70,73 +71,84 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
   };
 
   return (
-    <div className="space-y-4">
-      {/* Tabs */}
-      <div className="flex gap-1 overflow-hidden rounded-full border border-border/40 bg-tab-inactive p-1">
-        {(["idea", "lyrics"] as const).map((t) => (
-          <button
-            key={t}
-            onClick={() => { setTab(t); setTextInput(""); }}
-            className={`flex-1 cursor-pointer rounded-full border py-2 text-sm font-medium transition-all duration-200 ${
-              tab === t
-                ? "border-border/40 bg-menu-selected text-title shadow-sm"
-                : "border-transparent text-body-secondary hover:text-title"
-            }`}
-          >
-            {t === "idea" ? "想法" : "歌词"}
-          </button>
-        ))}
-      </div>
-
-      {/* Textarea */}
-      <div className="rounded-lg border border-border/40 bg-card-secondary p-3">
-        <textarea
-          value={textInput}
-          onChange={(e) => {
-            if (e.target.value.length <= maxLen) setTextInput(e.target.value);
-          }}
-          rows={4}
-          placeholder={
-            tab === "idea"
-              ? "你想唱什么？写下你的感受、故事或句子——我会把它变成歌词！🎨"
-              : "在这里输入歌词内容..."
-          }
-          className="w-full resize-none bg-transparent text-sm text-title placeholder:text-body-caption focus:outline-none prompt-textarea-scroll"
-        />
-        <div className="mt-2 flex items-center justify-between text-xs text-body-caption">
-          <div className="flex items-center gap-1.5">
+    <TooltipProvider delayDuration={300}>
+      <div className="space-y-4">
+        {/* Tabs */}
+        <div className="flex gap-1 overflow-hidden rounded-full border border-border/40 bg-tab-inactive p-1">
+          {(["idea", "lyrics"] as const).map((t) => (
             <button
-              onClick={handleOptimize}
-              disabled={!textInput.trim() || isOptimizing}
-              className="flex cursor-pointer items-center gap-1 rounded-full border border-border/60 px-2.5 py-1 text-title transition-all duration-200 hover:bg-hover-bg disabled:cursor-not-allowed disabled:opacity-50"
+              key={t}
+              onClick={() => { setTab(t); setTextInput(""); }}
+              className={`flex-1 cursor-pointer rounded-full border py-2 text-sm font-medium transition-all duration-200 ${
+                tab === t
+                  ? "border-border/40 bg-menu-selected text-title shadow-sm"
+                  : "border-transparent text-body-secondary hover:text-title"
+              }`}
             >
-              {isOptimizing ? (
-                <Loader2 className="h-3 w-3 animate-spin" />
-              ) : (
-                <Sparkles className="h-3 w-3" />
-              )}
-              {isOptimizing ? "优化中..." : optimizerLabel}
+              {t === "idea" ? "想法" : "歌词"}
             </button>
-            {textInput.trim() && (
-              <button
-                onClick={() => setTextInput("")}
-                className="flex cursor-pointer items-center justify-center rounded-full border border-border/60 p-1 text-body-secondary transition-all duration-200 hover:bg-hover-bg hover:text-title"
-                title="清空"
-              >
-                <X className="h-3 w-3" />
-              </button>
-            )}
+          ))}
+        </div>
+
+        {/* Textarea */}
+        <div className="rounded-lg border border-border/40 bg-card-secondary p-3">
+          <textarea
+            value={textInput}
+            onChange={(e) => {
+              if (e.target.value.length <= maxLen) setTextInput(e.target.value);
+            }}
+            rows={4}
+            placeholder={
+              tab === "idea"
+                ? "你想唱什么？写下你的感受、故事或句子——我会把它变成歌词！🎨"
+                : "在这里输入歌词内容..."
+            }
+            className="w-full resize-none bg-transparent text-sm text-title placeholder:text-body-caption focus:outline-none prompt-textarea-scroll"
+          />
+          <div className="mt-2 flex items-center justify-between text-xs text-body-caption">
+            <div className="flex items-center gap-1.5">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={handleOptimize}
+                    disabled={!textInput.trim() || isOptimizing}
+                    className="flex cursor-pointer items-center gap-1 rounded-full border border-border/60 px-2.5 py-1 text-title transition-all duration-200 hover:bg-hover-bg disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {isOptimizing ? (
+                      <Loader2 className="h-3 w-3 animate-spin" />
+                    ) : (
+                      <Sparkles className="h-3 w-3" />
+                    )}
+                    {isOptimizing ? "优化中..." : optimizerLabel}
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>AI 智能优化你的内容</TooltipContent>
+              </Tooltip>
+              {textInput.trim() && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={() => setTextInput("")}
+                      className="flex cursor-pointer items-center justify-center rounded-full border border-border/60 p-1 text-body-secondary transition-all duration-200 hover:bg-hover-bg hover:text-title"
+                    >
+                      <X className="h-3 w-3" />
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent>清空</TooltipContent>
+                </Tooltip>
+              )}
+            </div>
+            <span>{textInput.length}/{maxLen}</span>
           </div>
-          <span>{textInput.length}/{maxLen}</span>
+        </div>
+
+        {/* Create button - desktop only */}
+        <div className="hidden lg:block">
+          <Button variant="gradient" className="w-full" size="lg" disabled={!canCreate} onClick={onSubmit}>
+            {"创建 ★20"}
+          </Button>
         </div>
       </div>
-
-      {/* Create button - desktop only */}
-      <div className="hidden lg:block">
-        <Button variant="gradient" className="w-full" size="lg" disabled={!canCreate} onClick={onSubmit}>
-          {"创建 ★20"}
-        </Button>
-      </div>
-    </div>
+    </TooltipProvider>
   );
 };

@@ -7,6 +7,7 @@ import { StyleTagList } from "@/components/ai-audio/StyleTagList";
 import { GenerationForm } from "@/components/ai-audio/GenerationForm";
 import { ExploreCards } from "@/components/ai-audio/ExploreCards";
 import { AudioPlayer } from "@/components/ai-audio/AudioPlayer";
+import { HistorySidebar } from "@/components/ai-audio/HistorySidebar";
 
 export interface Track {
   id: string;
@@ -24,6 +25,7 @@ const AIAudio = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isOptimizing, setIsOptimizing] = useState(false);
   const [pureMusic, setPureMusic] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
 
   const handleTagClick = (tag: string) => {
     setStyleInput((prev) => {
@@ -52,7 +54,7 @@ const AIAudio = () => {
             <Home className="h-4 w-4" />
             <span className="hidden sm:inline">首页</span>
           </Button>
-          <Button variant="ghost" size="sm" className="gap-1.5 text-body-secondary">
+          <Button variant="ghost" size="sm" onClick={() => setHistoryOpen(true)} className="gap-1.5 text-body-secondary">
             <Clock className="h-4 w-4" />
             <span className="hidden sm:inline">历史记录</span>
           </Button>
@@ -107,6 +109,7 @@ const AIAudio = () => {
           </div>
         </div>
       </div>
+
       {currentTrack && (
         <AudioPlayer
           track={currentTrack}
@@ -115,6 +118,8 @@ const AIAudio = () => {
           onClose={() => { setCurrentTrack(null); setIsPlaying(false); }}
         />
       )}
+
+      <HistorySidebar open={historyOpen} onClose={() => setHistoryOpen(false)} />
     </div>
   );
 };

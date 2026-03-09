@@ -1,4 +1,4 @@
-import { Headphones, FileText, Mic, Music, Play, Pause } from "lucide-react";
+import { Headphones, FileText, Mic, Music, Play, Pause, Wand2 } from "lucide-react";
 import type { Track } from "@/pages/AIAudio";
 
 import cover1 from "@/assets/cover1.jpg";

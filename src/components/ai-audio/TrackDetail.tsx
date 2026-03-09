@@ -99,9 +99,11 @@ export const TrackDetail = ({ track, isGenerating, isPlaying, onPlay, onEdit, on
 
       <div className="rounded-xl border border-border/40 bg-card p-5">
         <h3 className="text-sm font-semibold text-title mb-3">歌词</h3>
-        <pre className="text-sm text-body-secondary whitespace-pre-wrap font-sans leading-relaxed">
-          {lyrics}
-        </pre>
+        <div className="max-h-60 overflow-y-auto lyrics-scroll">
+          <pre className="text-sm text-body-secondary whitespace-pre-wrap font-sans leading-relaxed">
+            {lyrics}
+          </pre>
+        </div>
       </div>
     </div>
   );

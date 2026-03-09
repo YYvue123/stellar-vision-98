@@ -14,7 +14,7 @@ export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose }: Props) 
       {/* On large screens, offset to match right column; full width on mobile */}
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="lg:ml-[296px]">
-          <div className="flex items-center gap-4 rounded-t-xl border border-b-0 border-border/40 bg-card/95 px-4 py-3 backdrop-blur-md">
+          <div className="flex items-center gap-4 rounded-xl border border-border/40 bg-card/95 px-4 py-3 backdrop-blur-md shadow-lg">
             {/* Track info */}
             <div className="flex items-center gap-3 min-w-0 flex-1">
               <img

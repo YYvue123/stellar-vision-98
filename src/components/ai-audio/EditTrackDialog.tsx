@@ -21,6 +21,8 @@ export const EditTrackDialog = ({ open, onClose, track, onSave }: Props) => {
   const [coverPreview, setCoverPreview] = useState<string | null>(null);
   const [coverFile, setCoverFile] = useState<File | null>(null);
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
+  const [tempPreview, setTempPreview] = useState<string | null>(null);
+  const [tempFile, setTempFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleOpenChange = (isOpen: boolean) => {

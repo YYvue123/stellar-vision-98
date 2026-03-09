@@ -121,6 +121,8 @@ interface Props {
   onClose: () => void;
   onPlay: (track: HistoryTrack) => void;
   onSelect: (track: HistoryTrack) => void;
+  onEdit: (track: HistoryTrack) => void;
+  onDownload: (track: HistoryTrack) => void;
 }
 
 export const HistorySidebar = ({ open, onClose, onPlay, onSelect }: Props) => {

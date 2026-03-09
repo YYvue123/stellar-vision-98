@@ -61,9 +61,9 @@ const AIAudio = () => {
         </div>
       </header>
 
-      {/* Main content – left column top-aligned, right fills remaining */}
+      {/* Main content */}
       <div className="flex-1 px-4 py-6 md:px-6 pb-20">
-        <div className="grid w-full max-w-6xl gap-6 lg:grid-cols-[280px_1fr]">
+        <div className="grid w-full max-w-6xl gap-6 lg:grid-cols-[280px_1fr] lg:items-center">
           {/* Left column – generation panel */}
           <div className="space-y-5">
             {/* Model selector */}

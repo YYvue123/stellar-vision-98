@@ -36,6 +36,7 @@
     --menu-selected: 0 0% 100%;
     --theme-green: 158 63% 63.5%;
     --theme-purple: 240 74% 61%;
+    --tab-inactive: 240 14% 95%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -79,6 +80,7 @@
     --menu-selected: 240 3% 14.5%;
     --theme-green: 158 63% 63.5%;
     --theme-purple: 240 74% 61%;
+    --tab-inactive: 240 8% 73.3%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;

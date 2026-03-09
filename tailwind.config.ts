@@ -67,6 +67,7 @@ export default {
         "theme-green": "hsl(var(--theme-green))",
         "theme-purple": "hsl(var(--theme-purple))",
         "bg-2": "hsl(var(--bg-2))",
+        "tab-inactive": "hsl(var(--tab-inactive))",
       },
       borderRadius: {
         lg: "var(--radius)",

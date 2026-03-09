@@ -73,7 +73,7 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
   return (
     <div className="space-y-4">
       {/* Tabs */}
-      <div className="flex overflow-hidden rounded-full border border-border/60 bg-card-secondary">
+      <div className="flex overflow-hidden rounded-full border border-border/60 bg-tab-inactive">
         {(["idea", "lyrics"] as const).map((t) => (
           <button
             key={t}

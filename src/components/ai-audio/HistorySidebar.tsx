@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Play, MoreHorizontal, Trash2, Download, Pencil } from "lucide-react";
+import { X, Play, Pause, MoreHorizontal, Trash2, Download, Pencil } from "lucide-react";
 import cover1 from "@/assets/cover1.jpg";
 import cover2 from "@/assets/cover2.jpg";
 import cover3 from "@/assets/cover3.jpg";

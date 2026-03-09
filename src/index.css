@@ -140,3 +140,22 @@
 .prompt-textarea-scroll::-webkit-scrollbar-button {
   display: none;
 }
+
+/* Thin scrollbar for lyrics */
+.lyrics-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+.lyrics-scroll::-webkit-scrollbar {
+  width: 3px;
+}
+.lyrics-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.lyrics-scroll::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+.lyrics-scroll::-webkit-scrollbar-button {
+  display: none;
+}

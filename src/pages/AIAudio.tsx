@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@/components/ThemeProvider";
 import { Sun, Moon, Home, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { StyleTagList } from "@/components/ai-audio/StyleTagList";
 import { GenerationForm } from "@/components/ai-audio/GenerationForm";
 import { ExploreCards } from "@/components/ai-audio/ExploreCards";

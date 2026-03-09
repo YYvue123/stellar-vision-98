@@ -84,14 +84,7 @@ const AIAudio = () => {
             </div>
 
             {/* Pure music toggle */}
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-bold text-foreground">生成纯音乐</span>
-              <button
-                className="relative h-6 w-11 cursor-pointer rounded-full bg-border transition-colors duration-200"
-              >
-                <span className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-primary-foreground shadow transition-transform duration-200 translate-x-0" />
-              </button>
-            </div>
+            <PureMusicToggle />
 
             {/* Generation form */}
             <GenerationForm styleInput={styleInput} textInput={textInput} setTextInput={setTextInput} isOptimizing={isOptimizing} setIsOptimizing={setIsOptimizing} />

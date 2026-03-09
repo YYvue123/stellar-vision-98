@@ -108,7 +108,7 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
           <button
             onClick={handleOptimize}
             disabled={!textInput.trim() || isOptimizing}
-            className="flex cursor-pointer items-center gap-1 rounded-full border border-border/60 px-2.5 py-1 transition-all duration-200 hover:bg-hover-bg disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex cursor-pointer items-center gap-1 rounded-full border border-border/60 px-2.5 py-1 text-title transition-all duration-200 hover:bg-hover-bg disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isOptimizing ? (
               <Loader2 className="h-3 w-3 animate-spin" />

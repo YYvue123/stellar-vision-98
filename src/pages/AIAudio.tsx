@@ -97,8 +97,10 @@ const AIAudio = () => {
             <GenerationForm styleInput={styleInput} textInput={textInput} setTextInput={setTextInput} isOptimizing={isOptimizing} setIsOptimizing={setIsOptimizing} />
           </div>
 
-          {/* Right column – explore */}
-          <ExploreCards onPlay={handlePlay} currentTrack={currentTrack} isPlaying={isPlaying} />
+          {/* Right column – explore, vertically centered */}
+          <div className="flex items-center justify-center self-center">
+            <ExploreCards onPlay={handlePlay} currentTrack={currentTrack} isPlaying={isPlaying} />
+          </div>
         </div>
       </div>
       {currentTrack && (

@@ -37,27 +37,20 @@ export const StyleTagList = ({ styleInput, setStyleInput, onTagClick }: Props) =
         className="w-full resize-none bg-transparent text-sm text-title placeholder:text-body-caption focus:outline-none"
       />
 
-      {/* Tags */}
-      <div className="flex flex-wrap items-center gap-1.5">
+      {/* Tags - single row horizontal scroll */}
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
         {pool.map((s) => (
           <button
             key={s}
             onClick={() => handleTagClick(s)}
-            className="cursor-pointer rounded-full border border-border/60 bg-card px-2.5 py-1 text-xs text-body-secondary transition-all duration-200 hover:bg-hover-bg hover:text-title"
+            className="flex-shrink-0 cursor-pointer rounded-full border border-border/60 bg-card px-2.5 py-1 text-xs text-body-secondary transition-all duration-200 hover:bg-hover-bg hover:text-title"
           >
             {s}
           </button>
         ))}
         <button
           onClick={shuffle}
-          className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-border/60 bg-card px-2.5 py-1 text-xs text-body-secondary transition-all duration-200 hover:bg-hover-bg"
-          title="换一批"
-        >
-          <ChevronRight className="h-3 w-3" />
-        </button>
-        <button
-          onClick={shuffle}
-          className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-border/60 bg-card px-2.5 py-1 text-xs text-body-secondary transition-all duration-200 hover:bg-hover-bg"
+          className="flex-shrink-0 inline-flex cursor-pointer items-center gap-1 rounded-full border border-border/60 bg-card px-2.5 py-1 text-xs text-body-secondary transition-all duration-200 hover:bg-hover-bg"
           title="刷新"
         >
           <RefreshCw className="h-3 w-3" />

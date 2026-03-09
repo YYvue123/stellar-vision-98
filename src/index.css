@@ -52,7 +52,7 @@
     --foreground: 0 0% 100%;
     --card: 240 6.7% 20.6%;
     --card-foreground: 0 0% 100%;
-    --card-secondary: 240 5% 25%;
+    --card-secondary: 240 3% 15%;
     --popover: 240 6.7% 20.6%;
     --popover-foreground: 0 0% 100%;
     --primary: 240 73.9% 61%;
@@ -76,7 +76,7 @@
     --body-caption: 240 5% 45.5%;
     --hover-bg: 240 5% 18.4%;
     --panel-bg: 240 5% 18%;
-    --menu-selected: 240 4% 23.5%;
+    --menu-selected: 240 3% 14.5%;
     --theme-green: 158 63% 63.5%;
     --theme-purple: 240 74% 61%;
 

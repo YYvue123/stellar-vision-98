@@ -278,6 +278,8 @@ const AIAudio = () => {
         onSelect={handleHistorySelect}
         onEdit={handleHistoryEdit}
         onDownload={handleDownload}
+        currentTrackId={currentTrack?.id}
+        isPlaying={isPlaying}
       />
 
       <EditTrackDialog

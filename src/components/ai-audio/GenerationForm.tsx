@@ -7,6 +7,9 @@ export const GenerationForm = () => {
   const [text, setText] = useState("");
   const [pureMusic, setPureMusic] = useState(false);
 
+  const maxLen = tab === "lyrics" ? 3000 : 200;
+  const optimizerLabel = tab === "lyrics" ? "歌词优化器" : "创意优化器";
+
   return (
     <div className="space-y-4">
       {/* Pure music toggle */}
@@ -31,7 +34,7 @@ export const GenerationForm = () => {
         {(["idea", "lyrics"] as const).map((t) => (
           <button
             key={t}
-            onClick={() => setTab(t)}
+            onClick={() => { setTab(t); setText(""); }}
             className={`flex-1 cursor-pointer py-2 text-sm font-medium transition-all duration-200 ${
               tab === t
                 ? "bg-menu-selected text-title shadow-sm"
@@ -47,11 +50,13 @@ export const GenerationForm = () => {
       <div className="rounded-lg border border-border/40 bg-card-secondary p-3">
         <textarea
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => {
+            if (e.target.value.length <= maxLen) setText(e.target.value);
+          }}
           rows={4}
           placeholder={
             tab === "idea"
-              ? '快来输入灵感关键词，比如"青春"或"夏天的风"，马上生成属于你的旋律！'
+              ? "你想唱什么？写下你的感受、故事或句子——我会把它变成歌词！🎨"
               : "在这里输入歌词内容..."
           }
           className="w-full resize-none bg-transparent text-sm text-title placeholder:text-body-caption focus:outline-none"
@@ -59,9 +64,9 @@ export const GenerationForm = () => {
         <div className="mt-2 flex items-center justify-between text-xs text-body-caption">
           <button className="flex cursor-pointer items-center gap-1 rounded-full border border-border/60 px-2.5 py-1 transition-all duration-200 hover:bg-hover-bg">
             <Sparkles className="h-3 w-3" />
-            创意生成器
+            {optimizerLabel}
           </button>
-          <span>{text.length}/200</span>
+          <span>{text.length}/{maxLen}</span>
         </div>
       </div>
 

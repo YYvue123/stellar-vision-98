@@ -2,27 +2,57 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ThemeProvider";
-import { ArrowLeft, Sun, Moon, RefreshCw, Sparkles, Music, Mic, FileText, Headphones } from "lucide-react";
+import { Sun, Moon, Home, Clock } from "lucide-react";
 import { StyleTagList } from "@/components/ai-audio/StyleTagList";
 import { GenerationForm } from "@/components/ai-audio/GenerationForm";
 import { ExploreCards } from "@/components/ai-audio/ExploreCards";
-import { PlanInfo } from "@/components/ai-audio/PlanInfo";
+import { AudioPlayer } from "@/components/ai-audio/AudioPlayer";
+
+export interface Track {
+  id: string;
+  title: string;
+  genre: string;
+  cover: string;
+}
 
 const AIAudio = () => {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
+  const [styleInput, setStyleInput] = useState("");
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handleTagClick = (tag: string) => {
+    setStyleInput((prev) => {
+      const trimmed = prev.trim();
+      if (trimmed) return `${trimmed},${tag}`;
+      return tag;
+    });
+  };
+
+  const handlePlay = (track: Track) => {
+    if (currentTrack?.id === track.id) {
+      setIsPlaying(!isPlaying);
+    } else {
+      setCurrentTrack(track);
+      setIsPlaying(true);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-20">
       {/* Top bar */}
       <header className="sticky top-0 z-10 flex items-center justify-between border-b border-border/40 bg-background/80 px-4 py-3 backdrop-blur-sm md:px-6">
-        <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" onClick={() => navigate("/")}>
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
-          <h1 className="text-lg font-semibold text-title">音乐生成</h1>
-        </div>
+        <h1 className="text-lg font-semibold text-title">音乐生成</h1>
         <div className="flex items-center gap-2">
+          <Button variant="ghost" size="sm" onClick={() => navigate("/")} className="gap-1.5 text-body-secondary">
+            <Home className="h-4 w-4" />
+            <span className="hidden sm:inline">首页</span>
+          </Button>
+          <Button variant="ghost" size="sm" className="gap-1.5 text-body-secondary">
+            <Clock className="h-4 w-4" />
+            <span className="hidden sm:inline">历史记录</span>
+          </Button>
           <Button variant="ghost" size="icon" onClick={toggleTheme}>
             {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
           </Button>
@@ -30,14 +60,16 @@ const AIAudio = () => {
       </header>
 
       <div className="mx-auto max-w-6xl px-4 py-6 md:px-6">
-        <div className="grid gap-6 lg:grid-cols-[380px_1fr]">
+        <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
           {/* Left column – generation panel */}
-          <div className="space-y-6">
+          <div className="space-y-5">
             {/* Model selector */}
             <div>
-              <label className="mb-2 block text-sm font-medium text-title">模型选择</label>
-              <div className="flex items-center gap-2 rounded-lg border border-border/60 bg-card px-4 py-3 text-sm text-title">
-                <span className="inline-block h-5 w-5 rounded-full bg-gradient-to-br from-orange-400 to-red-500" />
+              <div className="mb-2 flex items-center justify-between">
+                <label className="text-sm font-medium text-title">模型选择</label>
+                <span className="inline-block h-2.5 w-2.5 rounded-full bg-gradient-to-br from-orange-400 to-red-500" />
+              </div>
+              <div className="flex items-center gap-2 rounded-lg border border-border/60 bg-card px-3 py-2.5 text-sm text-title">
                 Suno
               </div>
             </div>
@@ -45,20 +77,27 @@ const AIAudio = () => {
             {/* Style */}
             <div>
               <label className="mb-2 block text-sm font-medium text-title">风格</label>
-              <StyleTagList />
+              <StyleTagList styleInput={styleInput} setStyleInput={setStyleInput} onTagClick={handleTagClick} />
             </div>
 
             {/* Generation form */}
             <GenerationForm />
-
-            {/* Plan info */}
-            <PlanInfo />
           </div>
 
           {/* Right column – explore */}
-          <ExploreCards />
+          <ExploreCards onPlay={handlePlay} currentTrack={currentTrack} isPlaying={isPlaying} />
         </div>
       </div>
+
+      {/* Bottom player */}
+      {currentTrack && (
+        <AudioPlayer
+          track={currentTrack}
+          isPlaying={isPlaying}
+          onTogglePlay={() => setIsPlaying(!isPlaying)}
+          onClose={() => { setCurrentTrack(null); setIsPlaying(false); }}
+        />
+      )}
     </div>
   );
 };

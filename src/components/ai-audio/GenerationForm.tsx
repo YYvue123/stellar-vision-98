@@ -47,7 +47,7 @@ const fakeOptimizedLyrics = [
 每段旅程都值得记录`,
 ];
 
-export const GenerationForm = ({ styleInput, textInput, setTextInput }: Props) => {
+export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizing, setIsOptimizing }: Props) => {
   const [tab, setTab] = useState<"idea" | "lyrics">("idea");
   const [isOptimizing, setIsOptimizing] = useState(false);
 

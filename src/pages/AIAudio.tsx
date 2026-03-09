@@ -62,7 +62,7 @@ const AIAudio = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex h-screen flex-col bg-background overflow-hidden">
       {/* Top bar */}
       <header className="sticky top-0 z-10 flex h-12 items-center justify-between border-b border-border/40 bg-background/80 px-4 backdrop-blur-sm md:px-6">
         <h1 className="text-lg font-semibold text-title">音乐生成</h1>
@@ -82,10 +82,10 @@ const AIAudio = () => {
       </header>
 
       {/* Main content */}
-      <div className="flex flex-1 pb-20">
-        <div className="flex w-full lg:flex-row flex-col">
+      <div className="flex flex-1 overflow-hidden">
+        <div className="flex w-full lg:flex-row flex-col overflow-hidden">
           {/* Left column – generation panel */}
-          <div className="w-full lg:w-[320px] lg:min-h-[calc(100vh-48px)] flex-shrink-0 space-y-6 bg-bg-2 p-4 md:p-5">
+          <div className="w-full lg:w-[320px] flex-shrink-0 space-y-6 bg-bg-2 p-4 md:p-5 overflow-y-auto">
             {/* Model selector */}
             <div>
               <div className="mb-3 flex items-center justify-between">
@@ -127,7 +127,7 @@ const AIAudio = () => {
           </div>
 
           {/* Right column – explore, centered */}
-          <div className="flex flex-1 items-center justify-center p-4 md:p-6">
+          <div className="flex flex-1 items-center justify-center overflow-y-auto p-4 md:p-6">
             <div className="w-full max-w-[1056px]">
               <ExploreCards onPlay={handlePlay} currentTrack={currentTrack} isPlaying={isPlaying} />
             </div>

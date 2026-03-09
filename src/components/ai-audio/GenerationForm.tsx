@@ -49,7 +49,7 @@ const fakeOptimizedLyrics = [
 
 export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizing, setIsOptimizing }: Props) => {
   const [tab, setTab] = useState<"idea" | "lyrics">("idea");
-  const [isOptimizing, setIsOptimizing] = useState(false);
+  
 
   const maxLen = tab === "lyrics" ? 3000 : 200;
   const optimizerLabel = tab === "lyrics" ? "歌词优化器" : "创意优化器";

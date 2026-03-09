@@ -10,7 +10,7 @@ interface Props {
 
 export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose }: Props) => {
   return (
-    <div className="fixed bottom-4 left-0 right-0 z-50">
+    <div className="fixed bottom-[60px] lg:bottom-4 left-0 right-0 z-50">
       {/* On large screens, offset to match right column; full width on mobile */}
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="lg:ml-[296px]">
@@ -44,7 +44,12 @@ export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose }: Props) 
               </button>
             </div>
 
-            {/* Progress + volume */}
+            {/* Mobile close button */}
+            <button onClick={onClose} className="sm:hidden cursor-pointer text-body-secondary transition-colors hover:text-title">
+              <X className="h-4 w-4" />
+            </button>
+
+            {/* Progress + volume (desktop) */}
             <div className="hidden sm:flex items-center gap-3 flex-1 justify-end">
               <span className="text-xs text-body-caption">0:00 / 3:24</span>
               <div className="h-1 w-24 rounded-full bg-border overflow-hidden">

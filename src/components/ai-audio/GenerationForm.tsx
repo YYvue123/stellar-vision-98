@@ -51,7 +51,7 @@ export const GenerationForm = () => {
           rows={4}
           placeholder={
             tab === "idea"
-              ? "快来输入灵感关键词，比如"青春"或"夏天的风"，马上生成属于你的旋律！"
+              ? '快来输入灵感关键词，比如"青春"或"夏天的风"，马上生成属于你的旋律！'
               : "在这里输入歌词内容..."
           }
           className="w-full resize-none bg-transparent text-sm text-title placeholder:text-body-caption focus:outline-none"

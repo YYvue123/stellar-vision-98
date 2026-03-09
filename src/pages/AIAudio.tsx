@@ -153,7 +153,7 @@ const AIAudio = () => {
 
       {/* Main content */}
       <div className="flex flex-1 overflow-hidden">
-        <div className="flex w-full lg:flex-row flex-col overflow-hidden">
+        <div className="flex w-full lg:flex-row flex-col overflow-y-auto lg:overflow-hidden">
           {/* Left column – generation panel */}
           <div className="w-full lg:w-[320px] flex-shrink-0 space-y-6 bg-bg-2 p-4 md:p-5 overflow-y-auto">
             {/* Model selector */}

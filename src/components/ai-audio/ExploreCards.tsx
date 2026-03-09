@@ -54,7 +54,7 @@ export const ExploreCards = ({ onPlay, onCreateFrom, currentTrack, isPlaying }: 
                 className="group relative flex gap-3 sm:block cursor-pointer"
                 onClick={() => onPlay(track)}
               >
-                <div className="relative overflow-hidden rounded-xl aspect-square">
+                <div className="relative overflow-hidden rounded-xl aspect-square w-20 sm:w-full flex-shrink-0">
                   <img
                     src={track.cover}
                     alt={track.title}

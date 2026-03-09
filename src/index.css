@@ -27,6 +27,7 @@
     --radius: 0.75rem;
 
     /* Custom semantic tokens */
+    --bg-2: 240 25% 98%;
     --title: 0 0% 19.6%;
     --body-secondary: 0 0% 47.1%;
     --body-caption: 0 0% 63.1%;
@@ -69,6 +70,7 @@
     --ring: 240 73.9% 61%;
 
     /* Custom semantic tokens */
+    --bg-2: 240 5% 26%;
     --title: 240 25% 92.5%;
     --body-secondary: 240 8% 73.3%;
     --body-caption: 240 5% 45.5%;

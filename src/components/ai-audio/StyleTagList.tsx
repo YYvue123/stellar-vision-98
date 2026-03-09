@@ -27,19 +27,19 @@ export const StyleTagList = ({ styleInput, setStyleInput, onTagClick }: Props) =
   };
 
   return (
-    <div className="space-y-2">
+    <div className="rounded-lg border border-border/40 bg-card-secondary overflow-hidden">
       {/* Resizable textarea */}
       <textarea
         value={styleInput}
         onChange={(e) => setStyleInput(e.target.value)}
         rows={3}
         placeholder="输入或选择音乐风格..."
-        className="w-full rounded-lg border border-border/40 bg-card-secondary p-3 text-sm text-title placeholder:text-body-caption focus:outline-none resize-y min-h-[60px]"
+        className="w-full bg-transparent p-3 text-sm text-title placeholder:text-body-caption focus:outline-none resize-y min-h-[60px] border-none"
       />
 
-      {/* Tags row with fixed refresh button */}
-      <div className="flex items-center gap-1.5">
-        <div className="flex-1 overflow-x-auto pb-1 min-w-0 style-tags-scroll">
+      {/* Tags row inside the box */}
+      <div className="flex items-center gap-1.5 px-2 pb-2">
+        <div className="flex-1 overflow-x-auto min-w-0 style-tags-scroll">
           <div className="flex items-center gap-1.5">
             {pool.map((s) => (
               <button

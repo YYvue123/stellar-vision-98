@@ -66,6 +66,7 @@ export default {
         "menu-selected": "hsl(var(--menu-selected))",
         "theme-green": "hsl(var(--theme-green))",
         "theme-purple": "hsl(var(--theme-purple))",
+        "bg-2": "hsl(var(--bg-2))",
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -98,18 +98,29 @@ export const EditTrackDialog = ({ open, onClose, track, onSave }: Props) => {
       <Dialog open={uploadDialogOpen} onOpenChange={setUploadDialogOpen}>
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
-            <DialogTitle>自定义设置</DialogTitle>
+            <DialogTitle>上传封面</DialogTitle>
           </DialogHeader>
 
           <div className="flex flex-col items-center gap-5 py-4">
-            {/* Upload area */}
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="flex h-28 w-28 cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border/60 bg-card-secondary/30 text-body-caption transition-colors hover:border-primary/40 hover:text-primary"
-            >
-              <Upload className="h-6 w-6" />
-              <span className="text-xs">上传照片</span>
-            </button>
+            {/* Preview or upload area */}
+            {tempPreview ? (
+              <img src={tempPreview} alt="preview" className="h-28 w-28 rounded-xl object-cover border border-border/40" />
+            ) : (
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="flex h-28 w-28 cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border/60 bg-card-secondary/30 text-body-caption transition-colors hover:border-primary/40 hover:text-primary"
+              >
+                <Upload className="h-6 w-6" />
+                <span className="text-xs">上传照片</span>
+              </button>
+            )}
+
+            {tempPreview && (
+              <Button variant="outline" size="sm" className="gap-1.5 text-xs" onClick={() => fileInputRef.current?.click()}>
+                <Upload className="h-3.5 w-3.5" />
+                重新选择
+              </Button>
+            )}
 
             {/* Tips */}
             <div className="text-sm text-left w-full space-y-3">
@@ -132,8 +143,28 @@ export const EditTrackDialog = ({ open, onClose, track, onSave }: Props) => {
             type="file"
             accept="image/jpeg,image/png,image/webp"
             className="hidden"
-            onChange={handleFileSelect}
+            onChange={handleTempFileSelect}
           />
+
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { setTempPreview(null); setTempFile(null); setUploadDialogOpen(false); }} className="flex-1">
+              取消
+            </Button>
+            <Button
+              variant="gradient"
+              className="flex-1"
+              disabled={!tempPreview}
+              onClick={() => {
+                if (tempFile) {
+                  setCoverFile(tempFile);
+                  setCoverPreview(tempPreview);
+                }
+                setUploadDialogOpen(false);
+              }}
+            >
+              保存
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </>

@@ -50,14 +50,14 @@ const AIAudio = () => {
       <header className="sticky top-0 z-10 flex h-12 items-center justify-between border-b border-border/40 bg-background/80 px-4 backdrop-blur-sm md:px-6">
         <h1 className="text-lg font-semibold text-title">音乐生成</h1>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" onClick={() => navigate("/")} className="gap-1.5 text-body-secondary">
+          <button onClick={() => navigate("/")} className="flex h-8 cursor-pointer items-center gap-2 rounded-full border border-border/60 px-3 text-body-secondary transition-colors hover:bg-hover-bg hover:text-title">
             <Home className="h-4 w-4" />
-            <span className="hidden sm:inline">首页</span>
-          </Button>
-          <Button variant="ghost" size="sm" onClick={() => setHistoryOpen(true)} className="gap-1.5 text-body-secondary">
+            <span className="hidden sm:inline text-sm">首页</span>
+          </button>
+          <button onClick={() => setHistoryOpen(true)} className="flex h-8 cursor-pointer items-center gap-2 rounded-full border border-border/60 px-3 text-body-secondary transition-colors hover:bg-hover-bg hover:text-title">
             <Clock className="h-4 w-4" />
-            <span className="hidden sm:inline">历史记录</span>
-          </Button>
+            <span className="hidden sm:inline text-sm">历史记录</span>
+          </button>
           <Button variant="ghost" size="icon" onClick={toggleTheme}>
             {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
           </Button>

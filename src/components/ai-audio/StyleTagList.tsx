@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RefreshCw, ChevronRight } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 
 const allStyles = [
   "陷阱音乐", "放克", "硬核", "流行", "摇滚", "爵士", "R&B",

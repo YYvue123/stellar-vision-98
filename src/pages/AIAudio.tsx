@@ -68,7 +68,7 @@ const AIAudio = () => {
           <div className="w-full lg:w-[320px] flex-shrink-0 space-y-6 bg-bg-2 p-4 md:p-5">
             {/* Model selector */}
             <div>
-              <div className="mb-2 flex items-center justify-between">
+              <div className="mb-3 flex items-center justify-between">
                 <label className="text-sm font-bold text-foreground">模型选择</label>
                 <span className="inline-block h-2.5 w-2.5 rounded-full bg-gradient-to-br from-orange-400 to-red-500" />
               </div>

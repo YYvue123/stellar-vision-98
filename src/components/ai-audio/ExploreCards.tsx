@@ -45,7 +45,7 @@ export const ExploreCards = ({ onPlay, onCreateFrom, currentTrack, isPlaying }: 
         <h2 className="mb-4 text-lg font-semibold text-title">探索</h2>
 
         {/* Music cards */}
-        <div className="flex gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-5 sm:overflow-visible">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-5">
           {tracks.map((track) => {
             const active = currentTrack?.id === track.id && isPlaying;
             return (

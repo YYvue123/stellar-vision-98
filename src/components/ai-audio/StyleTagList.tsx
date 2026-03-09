@@ -1,48 +1,64 @@
 import { useState } from "react";
-import { RefreshCw } from "lucide-react";
+import { RefreshCw, ChevronRight } from "lucide-react";
 
 const allStyles = [
   "陷阱音乐", "放克", "硬核", "流行", "摇滚", "爵士", "R&B",
   "古典", "电子", "嘻哈", "乡村", "蓝调", "灵魂", "雷鬼",
+  "阿拉伯流行", "格里奥", "梦幻流行", "迪斯科", "朋克", "金属",
 ];
 
-export const StyleTagList = () => {
-  const [selected, setSelected] = useState<string[]>(["陷阱音乐"]);
-  const [visibleCount, setVisibleCount] = useState(6);
+interface Props {
+  styleInput: string;
+  setStyleInput: (v: string) => void;
+  onTagClick: (tag: string) => void;
+}
 
-  const toggle = (s: string) =>
-    setSelected((prev) =>
-      prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]
-    );
+export const StyleTagList = ({ styleInput, setStyleInput, onTagClick }: Props) => {
+  const [pool, setPool] = useState(() => allStyles.slice(0, 8));
+
+  const handleTagClick = (tag: string) => {
+    onTagClick(tag);
+    setPool((prev) => prev.filter((t) => t !== tag));
+  };
 
   const shuffle = () => {
     const shuffled = [...allStyles].sort(() => Math.random() - 0.5);
-    setVisibleCount(6);
-    setSelected([shuffled[0]]);
+    setPool(shuffled.slice(0, 8));
   };
 
   return (
-    <div className="rounded-lg border border-border/40 bg-card-secondary p-3">
-      <p className="mb-2 text-xs text-body-caption">
-        想要什么风格？HipHop、Melody……统统都能造！输入关键词，音乐立刻开始制作
-      </p>
-      <div className="flex flex-wrap items-center gap-2">
-        {allStyles.slice(0, visibleCount).map((s) => (
+    <div className="rounded-lg border border-border/40 bg-card-secondary p-3 space-y-2">
+      {/* Style text input */}
+      <textarea
+        value={styleInput}
+        onChange={(e) => setStyleInput(e.target.value)}
+        rows={3}
+        placeholder="输入或选择音乐风格..."
+        className="w-full resize-none bg-transparent text-sm text-title placeholder:text-body-caption focus:outline-none"
+      />
+
+      {/* Tags */}
+      <div className="flex flex-wrap items-center gap-1.5">
+        {pool.map((s) => (
           <button
             key={s}
-            onClick={() => toggle(s)}
-            className={`cursor-pointer rounded-full border px-3 py-1 text-xs transition-all duration-200 ${
-              selected.includes(s)
-                ? "border-primary bg-primary/10 text-primary"
-                : "border-border/60 bg-card text-body-secondary hover:bg-hover-bg"
-            }`}
+            onClick={() => handleTagClick(s)}
+            className="cursor-pointer rounded-full border border-border/60 bg-card px-2.5 py-1 text-xs text-body-secondary transition-all duration-200 hover:bg-hover-bg hover:text-title"
           >
             {s}
           </button>
         ))}
         <button
           onClick={shuffle}
-          className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-border/60 bg-card px-3 py-1 text-xs text-body-secondary transition-all duration-200 hover:bg-hover-bg"
+          className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-border/60 bg-card px-2.5 py-1 text-xs text-body-secondary transition-all duration-200 hover:bg-hover-bg"
+          title="换一批"
+        >
+          <ChevronRight className="h-3 w-3" />
+        </button>
+        <button
+          onClick={shuffle}
+          className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-border/60 bg-card px-2.5 py-1 text-xs text-body-secondary transition-all duration-200 hover:bg-hover-bg"
+          title="刷新"
         >
           <RefreshCw className="h-3 w-3" />
         </button>

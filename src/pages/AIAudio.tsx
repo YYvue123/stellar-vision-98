@@ -174,7 +174,7 @@ const AIAudio = () => {
             <div>
               <div className="mb-3 flex items-center justify-between">
                 <label className="text-sm font-bold text-foreground">模型选择</label>
-                <span className="inline-block h-2.5 w-2.5 rounded-full bg-gradient-to-br from-orange-400 to-red-500" />
+                <span className="inline-block h-3.5 w-3.5 rounded-full bg-gradient-to-br from-orange-400 to-red-500" />
               </div>
               <div className="flex items-center gap-2 rounded-lg border border-border/60 bg-card px-3 py-2.5 text-sm text-title">
                 Suno

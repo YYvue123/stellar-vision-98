@@ -154,9 +154,9 @@ const AIAudio = () => {
 
       {/* Main content */}
       <div className="flex flex-1 overflow-hidden">
-        <div className="flex w-full lg:flex-row flex-col overflow-y-auto lg:overflow-hidden">
+        <div className="flex w-full lg:flex-row flex-col overflow-y-auto lg:overflow-hidden scrollbar-mobile">
           {/* Left column – generation panel */}
-          <div className="w-full lg:w-[320px] flex-shrink-0 space-y-6 bg-bg-2 p-4 md:p-5 lg:overflow-y-auto">
+          <div className="w-full lg:w-[320px] flex-shrink-0 space-y-6 bg-bg-2 p-4 md:p-5 lg:overflow-y-auto lg:scrollbar-thin">
             {/* Model selector */}
             <div>
               <div className="mb-3 flex items-center justify-between">
@@ -199,7 +199,7 @@ const AIAudio = () => {
           </div>
 
           {/* Right column */}
-          <div className="flex flex-1 flex-col lg:overflow-y-auto p-4 md:p-6">
+          <div className="flex flex-1 flex-col lg:overflow-y-auto lg:scrollbar-thin p-4 md:p-6">
             {(isGenerating || detailTrack) ? (
               <div className="w-full max-w-[1056px] mx-auto flex flex-1 flex-col">
                 <TrackDetail
@@ -230,10 +230,16 @@ const AIAudio = () => {
       <div className="lg:hidden sticky bottom-0 z-10 border-t border-border/40 bg-background p-3">
         <Button 
           variant="gradient" 
-          className="w-full" 
+          className={`w-full ${(!styleInput.trim() || !textInput.trim() || isOptimizing) ? 'opacity-50' : ''}`}
           size="lg" 
-          disabled={!styleInput.trim() || !textInput.trim() || isOptimizing}
-          onClick={handleCreate}
+          onClick={() => {
+            if (!styleInput.trim() || !textInput.trim() || isOptimizing) {
+              const container = document.querySelector('.scrollbar-mobile');
+              container?.scrollTo({ top: 0, behavior: 'smooth' });
+              return;
+            }
+            handleCreate();
+          }}
         >
           {"创建 ★20"}
         </Button>

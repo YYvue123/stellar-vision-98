@@ -103,6 +103,34 @@
   }
 }
 
+/* Hide scrollbar on mobile main container, show on desktop panels */
+.scrollbar-mobile {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-mobile::-webkit-scrollbar {
+  display: none;
+}
+
+/* Desktop thin scrollbar utility */
+.lg\:scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+.lg\:scrollbar-thin::-webkit-scrollbar {
+  width: 3px;
+}
+.lg\:scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.lg\:scrollbar-thin::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+.lg\:scrollbar-thin::-webkit-scrollbar-button {
+  display: none;
+}
+
 /* Thin scrollbar for style tags */
 .style-tags-scroll {
   scrollbar-width: thin;

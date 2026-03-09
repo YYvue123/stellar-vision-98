@@ -45,16 +45,16 @@ export const ExploreCards = ({ onPlay, onCreateFrom, currentTrack, isPlaying }: 
         <h2 className="mb-4 text-lg font-semibold text-title">探索</h2>
 
         {/* Music cards */}
-        <div className="flex gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-5 sm:overflow-visible">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-5">
           {tracks.map((track) => {
             const active = currentTrack?.id === track.id && isPlaying;
             return (
               <div
                 key={track.id}
-                className="group relative min-w-[140px] flex-shrink-0 cursor-pointer sm:min-w-0"
+                className="group relative flex gap-3 sm:block cursor-pointer"
                 onClick={() => onPlay(track)}
               >
-                <div className="relative overflow-hidden rounded-xl aspect-square">
+                <div className="relative overflow-hidden rounded-xl aspect-square w-20 sm:w-full flex-shrink-0">
                   <img
                     src={track.cover}
                     alt={track.title}
@@ -75,8 +75,10 @@ export const ExploreCards = ({ onPlay, onCreateFrom, currentTrack, isPlaying }: 
                     </div>
                   </div>
                 </div>
-                <p className="mt-2 text-sm font-medium text-title truncate">{track.title}</p>
-                <p className="text-xs text-body-caption">{track.genre}</p>
+                <div className="flex flex-col justify-center sm:block">
+                  <p className="sm:mt-2 text-sm font-medium text-title truncate">{track.title}</p>
+                  <p className="text-xs text-body-caption">{track.genre}</p>
+                </div>
               </div>
             );
           })}

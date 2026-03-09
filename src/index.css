@@ -70,6 +70,7 @@
     --ring: 240 73.9% 61%;
 
     /* Custom semantic tokens */
+    --bg-2: 240 5% 26%;
     --title: 240 25% 92.5%;
     --body-secondary: 240 8% 73.3%;
     --body-caption: 240 5% 45.5%;

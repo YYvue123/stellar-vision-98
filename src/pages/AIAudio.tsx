@@ -239,6 +239,14 @@ const AIAudio = () => {
               return;
             }
             handleCreate();
+            // Scroll to generated content area after a short delay
+            setTimeout(() => {
+              const container = document.querySelector('.scrollbar-mobile');
+              const rightCol = container?.querySelector('.flex-1');
+              if (rightCol) {
+                (rightCol as HTMLElement).scrollIntoView({ behavior: 'smooth' });
+              }
+            }, 100);
           }}
         >
           {"创建 ★20"}

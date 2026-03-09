@@ -199,9 +199,8 @@ const AIAudio = () => {
 
           {/* Right column */}
           <div className="flex flex-1 flex-col overflow-y-auto p-4 md:p-6">
-            {/* Track detail / generating state */}
-            {(isGenerating || detailTrack) && (
-              <div className="mb-6 w-full max-w-[1056px] mx-auto">
+            {(isGenerating || detailTrack) ? (
+              <div className="w-full max-w-[1056px] mx-auto">
                 <TrackDetail
                   track={detailTrack}
                   isGenerating={isGenerating}
@@ -211,13 +210,13 @@ const AIAudio = () => {
                   onDownload={() => detailTrack && handleDownload(detailTrack)}
                 />
               </div>
-            )}
-
-            <div className="flex flex-1 items-center justify-center">
-              <div className="w-full max-w-[1056px]">
-                <ExploreCards onPlay={handlePlay} onCreateFrom={handleCreateFrom} currentTrack={currentTrack} isPlaying={isPlaying} />
+            ) : (
+              <div className="flex flex-1 items-center justify-center">
+                <div className="w-full max-w-[1056px]">
+                  <ExploreCards onPlay={handlePlay} onCreateFrom={handleCreateFrom} currentTrack={currentTrack} isPlaying={isPlaying} />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

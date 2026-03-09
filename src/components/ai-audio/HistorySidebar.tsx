@@ -125,7 +125,7 @@ interface Props {
   onDownload: (track: HistoryTrack) => void;
 }
 
-export const HistorySidebar = ({ open, onClose, onPlay, onSelect }: Props) => {
+export const HistorySidebar = ({ open, onClose, onPlay, onSelect, onEdit, onDownload }: Props) => {
   const [tracks, setTracks] = useState(mockHistory);
   const [deleteTarget, setDeleteTarget] = useState<HistoryTrack | null>(null);
 

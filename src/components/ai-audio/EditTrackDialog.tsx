@@ -7,6 +7,8 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { ImageIcon, Upload } from "lucide-react";
 import type { TrackDetailData } from "./TrackDetail";
 
@@ -23,12 +25,16 @@ export const EditTrackDialog = ({ open, onClose, track, onSave }: Props) => {
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
   const [tempPreview, setTempPreview] = useState<string | null>(null);
   const [tempFile, setTempFile] = useState<File | null>(null);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleOpenChange = (isOpen: boolean) => {
     if (isOpen && track) {
       setCoverPreview(null);
       setCoverFile(null);
+      setTitle(track.title);
+      setDescription("");
     }
     if (!isOpen) onClose();
   };
@@ -51,9 +57,10 @@ export const EditTrackDialog = ({ open, onClose, track, onSave }: Props) => {
             <DialogTitle>自定义设置</DialogTitle>
           </DialogHeader>
 
-          <div className="flex flex-col items-center gap-4 mt-2">
-            {/* Cover preview */}
-            <div className="flex flex-col items-center gap-3">
+          <div className="flex gap-5 mt-2">
+            {/* Left: cover + edit button */}
+            <div className="flex flex-col items-center gap-3 flex-shrink-0">
+              <p className="text-sm font-semibold text-title self-start">编辑封面</p>
               {displayCover ? (
                 <img
                   src={displayCover}
@@ -69,11 +76,23 @@ export const EditTrackDialog = ({ open, onClose, track, onSave }: Props) => {
                 variant="outline"
                 size="sm"
                 className="gap-1.5 text-xs"
-                onClick={() => setUploadDialogOpen(true)}
+                onClick={() => { setTempPreview(null); setTempFile(null); setUploadDialogOpen(true); }}
               >
                 <ImageIcon className="h-3.5 w-3.5" />
                 编辑照片
               </Button>
+            </div>
+
+            {/* Right: title + description */}
+            <div className="flex-1 space-y-3">
+              <div>
+                <p className="text-sm font-semibold text-title mb-1.5">标题</p>
+                <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="输入标题" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-title mb-1.5">说明</p>
+                <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Enter description" className="min-h-[100px] resize-y" />
+              </div>
             </div>
           </div>
 
@@ -85,7 +104,7 @@ export const EditTrackDialog = ({ open, onClose, track, onSave }: Props) => {
               variant="gradient"
               className="flex-1"
               onClick={() => {
-                onSave({ title: track?.title ?? "", description: "", coverFile: coverFile || undefined });
+                onSave({ title, description, coverFile: coverFile || undefined });
                 onClose();
               }}
             >
@@ -103,7 +122,6 @@ export const EditTrackDialog = ({ open, onClose, track, onSave }: Props) => {
           </DialogHeader>
 
           <div className="flex flex-col items-center gap-5 py-4">
-            {/* Preview or upload area */}
             {tempPreview ? (
               <img src={tempPreview} alt="preview" className="h-28 w-28 rounded-xl object-cover border border-border/40" />
             ) : (
@@ -123,7 +141,6 @@ export const EditTrackDialog = ({ open, onClose, track, onSave }: Props) => {
               </Button>
             )}
 
-            {/* Tips */}
             <div className="text-sm text-left w-full space-y-3">
               <div>
                 <p className="font-semibold text-primary">上传提示</p>

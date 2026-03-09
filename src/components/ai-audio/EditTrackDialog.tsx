@@ -36,9 +36,8 @@ export const EditTrackDialog = ({ open, onClose, track, onSave }: Props) => {
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setCoverFile(file);
-      setCoverPreview(URL.createObjectURL(file));
-      setUploadDialogOpen(false);
+      setTempFile(file);
+      setTempPreview(URL.createObjectURL(file));
     }
   };
 

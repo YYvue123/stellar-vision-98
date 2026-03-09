@@ -22,6 +22,7 @@ const AIAudio = () => {
   const [textInput, setTextInput] = useState("");
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isOptimizing, setIsOptimizing] = useState(false);
 
   const handleTagClick = (tag: string) => {
     setStyleInput((prev) => {
@@ -41,7 +42,7 @@ const AIAudio = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="flex min-h-screen flex-col bg-background">
       {/* Top bar */}
       <header className="sticky top-0 z-10 flex items-center justify-between border-b border-border/40 bg-background/80 px-4 py-3 backdrop-blur-sm md:px-6">
         <h1 className="text-lg font-semibold text-title">音乐生成</h1>
@@ -60,8 +61,9 @@ const AIAudio = () => {
         </div>
       </header>
 
-      <div className="mx-auto max-w-6xl px-4 py-6 md:px-6">
-        <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
+      {/* Main content – vertically centered on desktop */}
+      <div className="flex flex-1 items-start lg:items-center justify-center px-4 py-6 md:px-6">
+        <div className="grid w-full max-w-6xl gap-6 lg:grid-cols-[280px_1fr]">
           {/* Left column – generation panel */}
           <div className="space-y-5">
             {/* Model selector */}
@@ -92,15 +94,13 @@ const AIAudio = () => {
             </div>
 
             {/* Generation form */}
-            <GenerationForm styleInput={styleInput} textInput={textInput} setTextInput={setTextInput} />
+            <GenerationForm styleInput={styleInput} textInput={textInput} setTextInput={setTextInput} isOptimizing={isOptimizing} setIsOptimizing={setIsOptimizing} />
           </div>
 
           {/* Right column – explore */}
           <ExploreCards onPlay={handlePlay} currentTrack={currentTrack} isPlaying={isPlaying} />
         </div>
       </div>
-
-      {/* Bottom player – constrained to right column area */}
       {currentTrack && (
         <AudioPlayer
           track={currentTrack}

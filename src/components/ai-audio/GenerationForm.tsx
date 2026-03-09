@@ -6,6 +6,8 @@ interface Props {
   styleInput: string;
   textInput: string;
   setTextInput: (v: string) => void;
+  isOptimizing: boolean;
+  setIsOptimizing: (v: boolean) => void;
 }
 
 const fakeOptimizedIdeas = [
@@ -45,13 +47,13 @@ const fakeOptimizedLyrics = [
 每段旅程都值得记录`,
 ];
 
-export const GenerationForm = ({ styleInput, textInput, setTextInput }: Props) => {
+export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizing, setIsOptimizing }: Props) => {
   const [tab, setTab] = useState<"idea" | "lyrics">("idea");
-  const [isOptimizing, setIsOptimizing] = useState(false);
+  
 
   const maxLen = tab === "lyrics" ? 3000 : 200;
   const optimizerLabel = tab === "lyrics" ? "歌词优化器" : "创意优化器";
-  const canCreate = styleInput.trim().length > 0 && textInput.trim().length > 0;
+  const canCreate = styleInput.trim().length > 0 && textInput.trim().length > 0 && !isOptimizing;
 
   const handleOptimize = () => {
     if (!textInput.trim()) return;

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Sparkles, Loader2 } from "lucide-react";
+import { Sparkles, Loader2, X } from "lucide-react";
 
 interface Props {
   styleInput: string;
@@ -104,23 +104,34 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
           className="w-full resize-none bg-transparent text-sm text-title placeholder:text-body-caption focus:outline-none prompt-textarea-scroll"
         />
         <div className="mt-2 flex items-center justify-between text-xs text-body-caption">
-          <button
-            onClick={handleOptimize}
-            disabled={!textInput.trim() || isOptimizing}
-            className="flex cursor-pointer items-center gap-1 rounded-full border border-border/60 px-2.5 py-1 text-title transition-all duration-200 hover:bg-hover-bg disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            {isOptimizing ? (
-              <Loader2 className="h-3 w-3 animate-spin" />
-            ) : (
-              <Sparkles className="h-3 w-3" />
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={handleOptimize}
+              disabled={!textInput.trim() || isOptimizing}
+              className="flex cursor-pointer items-center gap-1 rounded-full border border-border/60 px-2.5 py-1 text-title transition-all duration-200 hover:bg-hover-bg disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {isOptimizing ? (
+                <Loader2 className="h-3 w-3 animate-spin" />
+              ) : (
+                <Sparkles className="h-3 w-3" />
+              )}
+              {isOptimizing ? "优化中..." : optimizerLabel}
+            </button>
+            {textInput.trim() && (
+              <button
+                onClick={() => setTextInput("")}
+                className="flex cursor-pointer items-center justify-center rounded-full border border-border/60 p-1 text-body-secondary transition-all duration-200 hover:bg-hover-bg hover:text-title"
+                title="清空"
+              >
+                <X className="h-3 w-3" />
+              </button>
             )}
-            {isOptimizing ? "优化中..." : optimizerLabel}
-          </button>
+          </div>
           <span>{textInput.length}/{maxLen}</span>
         </div>
       </div>
 
-      {/* Create button - sticky on mobile */}
+      {/* Create button - desktop only */}
       <div className="hidden lg:block">
         <Button variant="gradient" className="w-full" size="lg" disabled={!canCreate} onClick={onSubmit}>
           {"创建 ★20"}

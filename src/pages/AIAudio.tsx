@@ -65,7 +65,7 @@ const AIAudio = () => {
       <div className="flex flex-1 pb-20">
         <div className="flex w-full lg:flex-row flex-col">
           {/* Left column – generation panel */}
-          <div className="w-full lg:w-[320px] flex-shrink-0 space-y-5 bg-bg-2 p-4 md:p-5">
+          <div className="w-full lg:w-[320px] flex-shrink-0 space-y-6 bg-bg-2 p-4 md:p-5">
             {/* Model selector */}
             <div>
               <div className="mb-2 flex items-center justify-between">

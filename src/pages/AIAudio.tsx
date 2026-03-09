@@ -230,12 +230,12 @@ const AIAudio = () => {
       <div className="lg:hidden sticky bottom-0 z-10 border-t border-border/40 bg-background p-3">
         <Button 
           variant="gradient" 
-          className="w-full" 
+          className={`w-full ${(!styleInput.trim() || !textInput.trim() || isOptimizing) ? 'opacity-50' : ''}`}
           size="lg" 
-          disabled={!styleInput.trim() || !textInput.trim() || isOptimizing}
           onClick={() => {
             if (!styleInput.trim() || !textInput.trim() || isOptimizing) {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              const container = document.querySelector('.scrollbar-mobile');
+              container?.scrollTo({ top: 0, behavior: 'smooth' });
               return;
             }
             handleCreate();

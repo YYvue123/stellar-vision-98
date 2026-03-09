@@ -79,7 +79,7 @@ const AIAudio = () => {
 
             {/* Style */}
             <div>
-              <label className="mb-2 block text-sm font-bold text-foreground">风格</label>
+              <label className="mb-3 block text-sm font-bold text-foreground">风格</label>
               <StyleTagList styleInput={styleInput} setStyleInput={setStyleInput} onTagClick={handleTagClick} />
             </div>
 

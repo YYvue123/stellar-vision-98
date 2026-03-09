@@ -22,6 +22,7 @@ const AIAudio = () => {
   const [textInput, setTextInput] = useState("");
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isOptimizing, setIsOptimizing] = useState(false);
 
   const handleTagClick = (tag: string) => {
     setStyleInput((prev) => {

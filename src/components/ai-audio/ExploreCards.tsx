@@ -51,7 +51,7 @@ export const ExploreCards = ({ onPlay, onCreateFrom, currentTrack, isPlaying }: 
             return (
               <div
                 key={track.id}
-                className="group relative min-w-[140px] flex-shrink-0 cursor-pointer sm:min-w-0"
+                className="group relative flex gap-3 sm:block cursor-pointer"
                 onClick={() => onPlay(track)}
               >
                 <div className="relative overflow-hidden rounded-xl aspect-square">

@@ -62,7 +62,7 @@ const AIAudio = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex h-screen flex-col bg-background overflow-hidden">
       {/* Top bar */}
       <header className="sticky top-0 z-10 flex h-12 items-center justify-between border-b border-border/40 bg-background/80 px-4 backdrop-blur-sm md:px-6">
         <h1 className="text-lg font-semibold text-title">音乐生成</h1>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Loader2 } from "lucide-react";
 
@@ -8,6 +7,8 @@ interface Props {
   setTextInput: (v: string) => void;
   isOptimizing: boolean;
   setIsOptimizing: (v: boolean) => void;
+  tab: "idea" | "lyrics";
+  setTab: (v: "idea" | "lyrics") => void;
 }
 
 const fakeOptimizedIdeas = [
@@ -47,10 +48,7 @@ const fakeOptimizedLyrics = [
 每段旅程都值得记录`,
 ];
 
-export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizing, setIsOptimizing }: Props) => {
-  const [tab, setTab] = useState<"idea" | "lyrics">("idea");
-  
-
+export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizing, setIsOptimizing, tab, setTab }: Props) => {
   const maxLen = tab === "lyrics" ? 3000 : 200;
   const optimizerLabel = tab === "lyrics" ? "歌词优化器" : "创意优化器";
   const canCreate = styleInput.trim().length > 0 && textInput.trim().length > 0 && !isOptimizing;

@@ -67,7 +67,7 @@ export const GenerationForm = () => {
 
       {/* Create button */}
       <Button variant="gradient" className="w-full" size="lg">
-        创建 ★20
+        {"创建 ★20"}
       </Button>
     </div>
   );

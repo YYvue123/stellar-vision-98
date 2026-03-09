@@ -19,6 +19,7 @@ const AIAudio = () => {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
   const [styleInput, setStyleInput] = useState("");
+  const [textInput, setTextInput] = useState("");
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -66,7 +67,7 @@ const AIAudio = () => {
             {/* Model selector */}
             <div>
               <div className="mb-2 flex items-center justify-between">
-                <label className="text-sm font-medium text-title">模型选择</label>
+                <label className="text-sm font-bold text-foreground">模型选择</label>
                 <span className="inline-block h-2.5 w-2.5 rounded-full bg-gradient-to-br from-orange-400 to-red-500" />
               </div>
               <div className="flex items-center gap-2 rounded-lg border border-border/60 bg-card px-3 py-2.5 text-sm text-title">
@@ -76,12 +77,22 @@ const AIAudio = () => {
 
             {/* Style */}
             <div>
-              <label className="mb-2 block text-sm font-medium text-title">风格</label>
+              <label className="mb-2 block text-sm font-bold text-foreground">风格</label>
               <StyleTagList styleInput={styleInput} setStyleInput={setStyleInput} onTagClick={handleTagClick} />
             </div>
 
+            {/* Pure music toggle */}
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-bold text-foreground">生成纯音乐</span>
+              <button
+                className="relative h-6 w-11 cursor-pointer rounded-full bg-border transition-colors duration-200"
+              >
+                <span className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-primary-foreground shadow transition-transform duration-200 translate-x-0" />
+              </button>
+            </div>
+
             {/* Generation form */}
-            <GenerationForm />
+            <GenerationForm styleInput={styleInput} textInput={textInput} setTextInput={setTextInput} />
           </div>
 
           {/* Right column – explore */}
@@ -89,7 +100,7 @@ const AIAudio = () => {
         </div>
       </div>
 
-      {/* Bottom player */}
+      {/* Bottom player – constrained to right column area */}
       {currentTrack && (
         <AudioPlayer
           track={currentTrack}

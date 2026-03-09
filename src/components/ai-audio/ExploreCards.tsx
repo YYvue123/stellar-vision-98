@@ -19,7 +19,7 @@ const features = [
   { icon: Headphones, title: "音效", desc: "生成各种音效素材" },
   { icon: FileText, title: "博客", desc: "音频相关资讯" },
   { icon: Mic, title: "配音", desc: "AI 智能配音" },
-  { icon: Music, title: "文本转音频", desc: "即将推出", disabled: true },
+  { icon: Music, title: "文本转音频", desc: "文本转语音合成" },
 ];
 
 interface Props {
@@ -43,7 +43,7 @@ export const ExploreCards = ({ onPlay, currentTrack, isPlaying }: Props) => {
       <div className="rounded-xl border border-border/40 bg-card p-5">
         <h2 className="mb-4 text-lg font-semibold text-title">探索</h2>
 
-        {/* Music cards - horizontal scroll on mobile, grid on desktop */}
+        {/* Music cards */}
         <div className="flex gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-5 sm:overflow-visible">
           {tracks.map((track) => {
             const active = currentTrack?.id === track.id && isPlaying;
@@ -59,7 +59,6 @@ export const ExploreCards = ({ onPlay, currentTrack, isPlaying }: Props) => {
                     alt={track.title}
                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
-                  {/* Play overlay */}
                   <div className={`absolute inset-0 flex items-end justify-end p-2 transition-opacity duration-200 ${
                     active ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                   }`}>
@@ -76,27 +75,25 @@ export const ExploreCards = ({ onPlay, currentTrack, isPlaying }: Props) => {
         </div>
       </div>
 
-      {/* Feature cards */}
+      {/* Feature cards - all coming soon */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {features.map((c) => (
-          <button
+          <div
             key={c.title}
-            disabled={c.disabled}
-            className={`group cursor-pointer rounded-xl border border-border/40 bg-card p-4 text-left shadow-sm transition-all duration-200 hover:bg-hover-bg hover:shadow-md ${
-              c.disabled ? "cursor-not-allowed opacity-60" : ""
-            }`}
+            className="group relative cursor-not-allowed rounded-xl border border-border/40 bg-card p-4 text-left opacity-50"
           >
             <div className="mb-3 inline-flex rounded-lg bg-gradient-to-br from-theme-purple/20 to-theme-green/20 p-2.5">
               <c.icon className="h-5 w-5 text-primary" />
             </div>
             <p className="text-sm font-medium text-title">{c.title}</p>
             <p className="mt-0.5 text-xs text-body-caption">{c.desc}</p>
-            {c.disabled && (
-              <span className="mt-2 inline-block rounded-full bg-card-secondary px-2 py-0.5 text-[10px] text-body-caption">
+            {/* Coming soon overlay */}
+            <div className="absolute inset-0 flex items-center justify-center rounded-xl">
+              <span className="rounded-full bg-card-secondary/90 px-3 py-1 text-xs font-medium text-body-secondary shadow-sm">
                 即将推出
               </span>
-            )}
-          </button>
+            </div>
+          </div>
         ))}
       </div>
     </div>

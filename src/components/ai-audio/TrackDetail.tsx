@@ -82,7 +82,7 @@ export const TrackDetail = ({ track, isGenerating, isPlaying, onPlay, onEdit, on
             onClick={onPlay}
           >
             <img src={track.cover} alt={track.title} className="h-full w-full object-cover" />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
                 {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5 ml-0.5" />}
               </div>

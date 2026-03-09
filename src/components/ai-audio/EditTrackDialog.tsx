@@ -144,7 +144,7 @@ export const EditTrackDialog = ({ open, onClose, track, onSave }: Props) => {
             type="file"
             accept="image/jpeg,image/png,image/webp"
             className="hidden"
-            onChange={handleTempFileSelect}
+            onChange={handleFileSelect}
           />
 
           <DialogFooter>

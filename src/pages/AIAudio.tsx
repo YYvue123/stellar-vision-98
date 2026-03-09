@@ -233,7 +233,13 @@ const AIAudio = () => {
           className="w-full" 
           size="lg" 
           disabled={!styleInput.trim() || !textInput.trim() || isOptimizing}
-          onClick={handleCreate}
+          onClick={() => {
+            if (!styleInput.trim() || !textInput.trim() || isOptimizing) {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              return;
+            }
+            handleCreate();
+          }}
         >
           {"创建 ★20"}
         </Button>

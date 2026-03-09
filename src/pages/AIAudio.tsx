@@ -7,6 +7,9 @@ import { GenerationForm } from "@/components/ai-audio/GenerationForm";
 import { ExploreCards } from "@/components/ai-audio/ExploreCards";
 import { AudioPlayer } from "@/components/ai-audio/AudioPlayer";
 import { HistorySidebar, HistoryTrack } from "@/components/ai-audio/HistorySidebar";
+import { TrackDetail, TrackDetailData } from "@/components/ai-audio/TrackDetail";
+import { EditTrackDialog } from "@/components/ai-audio/EditTrackDialog";
+import cover1 from "@/assets/cover1.jpg";
 
 export interface Track {
   id: string;
@@ -26,6 +29,12 @@ const AIAudio = () => {
   const [pureMusic, setPureMusic] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
   const [promptTab, setPromptTab] = useState<"idea" | "lyrics">("idea");
+
+  // Right-side detail state
+  const [detailTrack, setDetailTrack] = useState<TrackDetailData | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [editTarget, setEditTarget] = useState<TrackDetailData | null>(null);
 
   const handleTagClick = (tag: string) => {
     setStyleInput((prev) => {
@@ -56,9 +65,70 @@ const AIAudio = () => {
   };
 
   const handleHistorySelect = (track: HistoryTrack) => {
-    setStyleInput(track.style);
-    setTextInput(track.prompt);
-    setPromptTab(track.promptType);
+    // Show in right-side detail
+    setDetailTrack({
+      id: track.id,
+      title: track.title,
+      genre: track.genre,
+      cover: track.cover,
+      artist: "tfy1951",
+      duration: "3:26",
+    });
+  };
+
+  const handleCreateFrom = (track: Track) => {
+    // Fill left form with explore track info
+    setStyleInput(track.genre);
+    setTextInput(`创作一首类似「${track.title}」风格的歌曲`);
+    setPromptTab("idea");
+  };
+
+  const handleCreate = () => {
+    if (!styleInput.trim() || !textInput.trim()) return;
+    setIsGenerating(true);
+    setDetailTrack(null);
+    setTimeout(() => {
+      setIsGenerating(false);
+      setDetailTrack({
+        id: Date.now().toString(),
+        title: textInput.slice(0, 20) || "未命名作品",
+        genre: styleInput,
+        cover: cover1,
+        artist: "tfy1951",
+        duration: "3:26",
+      });
+    }, 3000);
+  };
+
+  const handleDetailPlay = () => {
+    if (detailTrack) {
+      const t: Track = { id: detailTrack.id, title: detailTrack.title, genre: detailTrack.genre, cover: detailTrack.cover };
+      handlePlay(t);
+    }
+  };
+
+  const handleEdit = (track: TrackDetailData) => {
+    setEditTarget(track);
+    setEditDialogOpen(true);
+  };
+
+  const handleHistoryEdit = (track: HistoryTrack) => {
+    handleEdit({
+      id: track.id,
+      title: track.title,
+      genre: track.genre,
+      cover: track.cover,
+      artist: "tfy1951",
+      duration: "3:26",
+    });
+  };
+
+  const handleDownload = (_track: TrackDetailData | HistoryTrack) => {
+    // Mock download
+    const link = document.createElement("a");
+    link.href = _track.cover;
+    link.download = `${_track.title}.jpg`;
+    link.click();
   };
 
   return (
@@ -123,13 +193,30 @@ const AIAudio = () => {
               setIsOptimizing={setIsOptimizing}
               tab={promptTab}
               setTab={setPromptTab}
+              onSubmit={handleCreate}
             />
           </div>
 
-          {/* Right column – explore, centered */}
-          <div className="flex flex-1 items-center justify-center overflow-y-auto p-4 md:p-6">
-            <div className="w-full max-w-[1056px]">
-              <ExploreCards onPlay={handlePlay} currentTrack={currentTrack} isPlaying={isPlaying} />
+          {/* Right column */}
+          <div className="flex flex-1 flex-col overflow-y-auto p-4 md:p-6">
+            {/* Track detail / generating state */}
+            {(isGenerating || detailTrack) && (
+              <div className="mb-6 w-full max-w-[1056px] mx-auto">
+                <TrackDetail
+                  track={detailTrack}
+                  isGenerating={isGenerating}
+                  isPlaying={isPlaying && currentTrack?.id === detailTrack?.id}
+                  onPlay={handleDetailPlay}
+                  onEdit={() => detailTrack && handleEdit(detailTrack)}
+                  onDownload={() => detailTrack && handleDownload(detailTrack)}
+                />
+              </div>
+            )}
+
+            <div className="flex flex-1 items-center justify-center">
+              <div className="w-full max-w-[1056px]">
+                <ExploreCards onPlay={handlePlay} onCreateFrom={handleCreateFrom} currentTrack={currentTrack} isPlaying={isPlaying} />
+              </div>
             </div>
           </div>
         </div>
@@ -149,6 +236,19 @@ const AIAudio = () => {
         onClose={() => setHistoryOpen(false)}
         onPlay={handleHistoryPlay}
         onSelect={handleHistorySelect}
+        onEdit={handleHistoryEdit}
+        onDownload={handleDownload}
+      />
+
+      <EditTrackDialog
+        open={editDialogOpen}
+        onClose={() => setEditDialogOpen(false)}
+        track={editTarget}
+        onSave={(data) => {
+          if (detailTrack && editTarget?.id === detailTrack.id) {
+            setDetailTrack({ ...detailTrack, title: data.title });
+          }
+        }}
       />
     </div>
   );

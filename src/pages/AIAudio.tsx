@@ -62,10 +62,10 @@ const AIAudio = () => {
       </header>
 
       {/* Main content */}
-      <div className="flex-1 px-4 py-6 md:px-6 pb-20">
-        <div className="grid w-full max-w-6xl gap-6 lg:grid-cols-[280px_1fr]">
-          {/* Left column – generation panel, top-aligned */}
-          <div className="space-y-5 self-start">
+      <div className="flex flex-1 pb-20">
+        <div className="flex w-full lg:flex-row flex-col">
+          {/* Left column – generation panel */}
+          <div className="w-full lg:w-[280px] flex-shrink-0 space-y-5 bg-[hsl(240_15%_88%)] dark:bg-[hsl(240_5%_18%)] p-4 md:p-5">
             {/* Model selector */}
             <div>
               <div className="mb-2 flex items-center justify-between">
@@ -97,8 +97,8 @@ const AIAudio = () => {
             <GenerationForm styleInput={styleInput} textInput={textInput} setTextInput={setTextInput} isOptimizing={isOptimizing} setIsOptimizing={setIsOptimizing} />
           </div>
 
-          {/* Right column – explore, vertically centered */}
-          <div className="flex items-center justify-center self-center">
+          {/* Right column – explore, centered */}
+          <div className="flex flex-1 items-center justify-center p-4 md:p-6">
             <ExploreCards onPlay={handlePlay} currentTrack={currentTrack} isPlaying={isPlaying} />
           </div>
         </div>

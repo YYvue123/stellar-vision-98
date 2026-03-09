@@ -27,17 +27,17 @@ export const StyleTagList = ({ styleInput, setStyleInput, onTagClick }: Props) =
   };
 
   return (
-    <div className="rounded-lg border border-border/40 bg-card-secondary p-3 space-y-2">
-      {/* Style text input */}
+    <div className="space-y-2">
+      {/* Resizable textarea */}
       <textarea
         value={styleInput}
         onChange={(e) => setStyleInput(e.target.value)}
         rows={3}
         placeholder="输入或选择音乐风格..."
-        className="w-full resize-none bg-transparent text-sm text-title placeholder:text-body-caption focus:outline-none"
+        className="w-full rounded-lg border border-border/40 bg-card-secondary p-3 text-sm text-title placeholder:text-body-caption focus:outline-none resize-y min-h-[60px]"
       />
 
-      {/* Tags - single row horizontal scroll + fixed refresh */}
+      {/* Tags row with fixed refresh button */}
       <div className="flex items-center gap-1.5">
         <div className="flex-1 overflow-x-auto pb-1 min-w-0 style-tags-scroll">
           <div className="flex items-center gap-1.5">
@@ -57,7 +57,7 @@ export const StyleTagList = ({ styleInput, setStyleInput, onTagClick }: Props) =
           className="flex-shrink-0 inline-flex cursor-pointer items-center justify-center rounded-full border border-border/60 bg-card p-1.5 text-body-secondary transition-all duration-200 hover:bg-hover-bg"
           title="刷新"
         >
-          <RefreshCw className="h-3 w-3" />
+          <RefreshCw className="h-3.5 w-3.5" />
         </button>
       </div>
     </div>

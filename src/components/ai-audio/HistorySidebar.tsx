@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Play, MoreHorizontal, Trash2, Download, Pencil } from "lucide-react";
+import { X, Play, Pause, MoreHorizontal, Trash2, Download, Pencil } from "lucide-react";
 import cover1 from "@/assets/cover1.jpg";
 import cover2 from "@/assets/cover2.jpg";
 import cover3 from "@/assets/cover3.jpg";
@@ -123,9 +123,11 @@ interface Props {
   onSelect: (track: HistoryTrack) => void;
   onEdit: (track: HistoryTrack) => void;
   onDownload: (track: HistoryTrack) => void;
+  currentTrackId?: string | null;
+  isPlaying?: boolean;
 }
 
-export const HistorySidebar = ({ open, onClose, onPlay, onSelect, onEdit, onDownload }: Props) => {
+export const HistorySidebar = ({ open, onClose, onPlay, onSelect, onEdit, onDownload, currentTrackId, isPlaying }: Props) => {
   const [tracks, setTracks] = useState(mockHistory);
   const [deleteTarget, setDeleteTarget] = useState<HistoryTrack | null>(null);
 
@@ -197,7 +199,7 @@ export const HistorySidebar = ({ open, onClose, onPlay, onSelect, onEdit, onDown
                         onClick={(e) => { e.stopPropagation(); onPlay(track); }}
                         className="rounded-full p-1.5 text-body-secondary hover:text-title hover:bg-hover-bg transition-colors"
                       >
-                        <Play className="h-4 w-4" />
+                        {currentTrackId === track.id && isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
                       </button>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>

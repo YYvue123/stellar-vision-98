@@ -96,3 +96,22 @@
     font-family: Inter, -apple-system, "system-ui", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
+
+/* Thin scrollbar for style tags */
+.style-tags-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+.style-tags-scroll::-webkit-scrollbar {
+  height: 3px;
+}
+.style-tags-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.style-tags-scroll::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+.style-tags-scroll::-webkit-scrollbar-button {
+  display: none;
+}

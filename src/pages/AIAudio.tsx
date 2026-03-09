@@ -99,7 +99,9 @@ const AIAudio = () => {
 
           {/* Right column – explore, centered */}
           <div className="flex flex-1 items-center justify-center p-4 md:p-6">
-            <ExploreCards onPlay={handlePlay} currentTrack={currentTrack} isPlaying={isPlaying} />
+            <div className="w-full max-w-[1056px]">
+              <ExploreCards onPlay={handlePlay} currentTrack={currentTrack} isPlaying={isPlaying} />
+            </div>
           </div>
         </div>
       </div>

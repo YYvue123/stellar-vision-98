@@ -151,7 +151,7 @@ const AIAudio = () => {
       <header className="sticky top-0 z-10 flex h-12 items-center justify-between border-b border-border/40 bg-background/80 px-4 backdrop-blur-sm md:px-6">
         <h1 className="text-lg font-semibold text-title">音乐生成</h1>
         <div className="flex items-center gap-2">
-          <button onClick={() => navigate("/")} className="flex h-8 cursor-pointer items-center gap-2 rounded-full border border-border/60 px-3 text-body-secondary transition-colors hover:bg-hover-bg hover:text-title">
+          <button onClick={() => { setDetailTrack(null); setIsGenerating(false); setStyleInput(""); setTextInput(""); setPromptTab("idea"); setPureMusic(false); }} className="flex h-8 cursor-pointer items-center gap-2 rounded-full border border-border/60 px-3 text-body-secondary transition-colors hover:bg-hover-bg hover:text-title">
             <Home className="h-4 w-4" />
             <span className="hidden sm:inline text-sm">首页</span>
           </button>

@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ThemeProvider";
 import { Sun, Moon, Home, Clock } from "lucide-react";
 import { StyleTagList } from "@/components/ai-audio/StyleTagList";
 import { GenerationForm } from "@/components/ai-audio/GenerationForm";
 import { ExploreCards } from "@/components/ai-audio/ExploreCards";
 import { AudioPlayer } from "@/components/ai-audio/AudioPlayer";
-import { HistorySidebar } from "@/components/ai-audio/HistorySidebar";
+import { HistorySidebar, HistoryTrack } from "@/components/ai-audio/HistorySidebar";
 
 export interface Track {
   id: string;
@@ -26,6 +25,7 @@ const AIAudio = () => {
   const [isOptimizing, setIsOptimizing] = useState(false);
   const [pureMusic, setPureMusic] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
+  const [promptTab, setPromptTab] = useState<"idea" | "lyrics">("idea");
 
   const handleTagClick = (tag: string) => {
     setStyleInput((prev) => {
@@ -44,6 +44,23 @@ const AIAudio = () => {
     }
   };
 
+  const handleHistoryPlay = (track: HistoryTrack) => {
+    const playerTrack: Track = {
+      id: track.id,
+      title: track.title,
+      genre: track.genre,
+      cover: track.cover,
+    };
+    setCurrentTrack(playerTrack);
+    setIsPlaying(true);
+  };
+
+  const handleHistorySelect = (track: HistoryTrack) => {
+    setStyleInput(track.style);
+    setTextInput(track.prompt);
+    setPromptTab(track.promptType);
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-background">
       {/* Top bar */}
@@ -58,9 +75,9 @@ const AIAudio = () => {
             <Clock className="h-4 w-4" />
             <span className="hidden sm:inline text-sm">历史记录</span>
           </button>
-          <Button variant="ghost" size="icon" onClick={toggleTheme}>
-            {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
-          </Button>
+          <button onClick={toggleTheme} className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-border/60 text-body-secondary transition-colors hover:bg-hover-bg hover:text-title">
+            {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+          </button>
         </div>
       </header>
 
@@ -98,7 +115,15 @@ const AIAudio = () => {
             </div>
 
             {/* Generation form */}
-            <GenerationForm styleInput={styleInput} textInput={textInput} setTextInput={setTextInput} isOptimizing={isOptimizing} setIsOptimizing={setIsOptimizing} />
+            <GenerationForm 
+              styleInput={styleInput} 
+              textInput={textInput} 
+              setTextInput={setTextInput} 
+              isOptimizing={isOptimizing} 
+              setIsOptimizing={setIsOptimizing}
+              tab={promptTab}
+              setTab={setPromptTab}
+            />
           </div>
 
           {/* Right column – explore, centered */}
@@ -119,7 +144,12 @@ const AIAudio = () => {
         />
       )}
 
-      <HistorySidebar open={historyOpen} onClose={() => setHistoryOpen(false)} />
+      <HistorySidebar 
+        open={historyOpen} 
+        onClose={() => setHistoryOpen(false)}
+        onPlay={handleHistoryPlay}
+        onSelect={handleHistorySelect}
+      />
     </div>
   );
 };

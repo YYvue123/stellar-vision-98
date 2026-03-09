@@ -6,6 +6,8 @@ interface Props {
   styleInput: string;
   textInput: string;
   setTextInput: (v: string) => void;
+  isOptimizing: boolean;
+  setIsOptimizing: (v: boolean) => void;
 }
 
 const fakeOptimizedIdeas = [

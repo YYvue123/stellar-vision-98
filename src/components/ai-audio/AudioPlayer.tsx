@@ -10,7 +10,7 @@ interface Props {
 
 export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose }: Props) => {
   return (
-    <div className="fixed bottom-[60px] lg:bottom-4 left-0 right-0 z-50">
+    <div className="fixed bottom-[68px] lg:bottom-4 left-0 right-0 z-50">
       {/* On large screens, offset to match right column; full width on mobile */}
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="lg:ml-[296px]">

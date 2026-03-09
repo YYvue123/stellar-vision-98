@@ -66,6 +66,10 @@ const AIAudio = () => {
   };
 
   const handleHistorySelect = (track: HistoryTrack) => {
+    // Fill left form with history track info
+    setStyleInput(track.style);
+    setTextInput(track.prompt);
+    setPromptTab(track.promptType);
     // Show in right-side detail
     setDetailTrack({
       id: track.id,

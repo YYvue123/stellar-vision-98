@@ -34,7 +34,7 @@ export const StyleTagList = ({ styleInput, setStyleInput, onTagClick }: Props) =
         onChange={(e) => setStyleInput(e.target.value)}
         rows={3}
         placeholder="输入或选择音乐风格..."
-        className="flex-1 w-full bg-transparent p-3 pb-1 text-sm text-title placeholder:text-body-caption focus:outline-none resize-none border-none"
+        className="flex-1 w-full bg-transparent p-3 pb-1 text-sm text-title placeholder:text-body-caption focus:outline-none resize-none border-none prompt-textarea-scroll"
       />
 
       {/* Tags + refresh row pinned to bottom */}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RefreshCw } from "lucide-react";
+import { RefreshCw, X } from "lucide-react";
 
 const allStyles = [
   "陷阱音乐", "放克", "硬核", "流行", "摇滚", "爵士", "R&B",
@@ -37,7 +37,7 @@ export const StyleTagList = ({ styleInput, setStyleInput, onTagClick }: Props) =
         className="flex-1 w-full bg-transparent p-3 pb-1 text-sm text-title placeholder:text-body-caption focus:outline-none resize-none border-none prompt-textarea-scroll"
       />
 
-      {/* Tags + refresh row pinned to bottom */}
+      {/* Tags + actions row pinned to bottom */}
       <div className="flex items-center gap-1.5 px-2 pb-2 flex-shrink-0">
         <div className="flex-1 overflow-x-auto min-w-0 style-tags-scroll">
           <div className="flex items-center gap-1.5">
@@ -52,6 +52,15 @@ export const StyleTagList = ({ styleInput, setStyleInput, onTagClick }: Props) =
             ))}
           </div>
         </div>
+        {styleInput.trim() && (
+          <button
+            onClick={() => setStyleInput("")}
+            className="flex-shrink-0 inline-flex cursor-pointer items-center justify-center rounded-full border border-border/60 bg-card p-1.5 text-body-secondary transition-all duration-200 hover:bg-hover-bg hover:text-title"
+            title="清空"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        )}
         <button
           onClick={shuffle}
           className="flex-shrink-0 inline-flex cursor-pointer items-center justify-center rounded-full border border-border/60 bg-card p-1.5 text-body-secondary transition-all duration-200 hover:bg-hover-bg"

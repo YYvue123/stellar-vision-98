@@ -121,7 +121,7 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
       </div>
 
       {/* Create button */}
-      <Button variant="gradient" className="w-full" size="lg" disabled={!canCreate}>
+      <Button variant="gradient" className="w-full" size="lg" disabled={!canCreate} onClick={onSubmit}>
         {"创建 ★20"}
       </Button>
     </div>

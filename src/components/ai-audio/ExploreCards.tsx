@@ -29,7 +29,7 @@ interface Props {
   isPlaying: boolean;
 }
 
-export const ExploreCards = ({ onPlay, currentTrack, isPlaying }: Props) => {
+export const ExploreCards = ({ onPlay, onCreateFrom, currentTrack, isPlaying }: Props) => {
   return (
     <div className="space-y-6">
       {/* Welcome banner */}

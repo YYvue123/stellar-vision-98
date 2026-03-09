@@ -120,10 +120,12 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
         </div>
       </div>
 
-      {/* Create button */}
-      <Button variant="gradient" className="w-full" size="lg" disabled={!canCreate} onClick={onSubmit}>
-        {"创建 ★20"}
-      </Button>
+      {/* Create button - sticky on mobile */}
+      <div className="hidden lg:block">
+        <Button variant="gradient" className="w-full" size="lg" disabled={!canCreate} onClick={onSubmit}>
+          {"创建 ★20"}
+        </Button>
+      </div>
     </div>
   );
 };

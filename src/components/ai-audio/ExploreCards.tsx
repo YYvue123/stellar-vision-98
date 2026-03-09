@@ -75,8 +75,10 @@ export const ExploreCards = ({ onPlay, onCreateFrom, currentTrack, isPlaying }: 
                     </div>
                   </div>
                 </div>
-                <p className="mt-2 text-sm font-medium text-title truncate">{track.title}</p>
-                <p className="text-xs text-body-caption">{track.genre}</p>
+                <div className="flex flex-col justify-center sm:block">
+                  <p className="sm:mt-2 text-sm font-medium text-title truncate">{track.title}</p>
+                  <p className="text-xs text-body-caption">{track.genre}</p>
+                </div>
               </div>
             );
           })}

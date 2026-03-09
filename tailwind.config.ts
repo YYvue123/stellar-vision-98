@@ -62,6 +62,7 @@ export default {
         "body-secondary": "hsl(var(--body-secondary))",
         "body-caption": "hsl(var(--body-caption))",
         "hover-bg": "hsl(var(--hover-bg))",
+        "panel-bg": "hsl(var(--panel-bg))",
         "menu-selected": "hsl(var(--menu-selected))",
         "theme-green": "hsl(var(--theme-green))",
         "theme-purple": "hsl(var(--theme-purple))",

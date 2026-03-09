@@ -31,6 +31,7 @@
     --body-secondary: 0 0% 47.1%;
     --body-caption: 0 0% 63.1%;
     --hover-bg: 300 3% 92.5%;
+    --panel-bg: 240 15% 88%;
     --menu-selected: 0 0% 100%;
     --theme-green: 158 63% 63.5%;
     --theme-purple: 240 74% 61%;
@@ -72,6 +73,7 @@
     --body-secondary: 240 8% 73.3%;
     --body-caption: 240 5% 45.5%;
     --hover-bg: 240 5% 18.4%;
+    --panel-bg: 240 5% 18%;
     --menu-selected: 240 4% 23.5%;
     --theme-green: 158 63% 63.5%;
     --theme-purple: 240 74% 61%;

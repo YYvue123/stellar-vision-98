@@ -71,15 +71,15 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
   return (
     <div className="space-y-4">
       {/* Tabs */}
-      <div className="flex overflow-hidden rounded-full border border-border/60 bg-tab-inactive">
+      <div className="flex gap-1 overflow-hidden rounded-full border border-border/40 bg-tab-inactive p-1">
         {(["idea", "lyrics"] as const).map((t) => (
           <button
             key={t}
             onClick={() => { setTab(t); setTextInput(""); }}
-            className={`flex-1 cursor-pointer py-2 text-sm font-medium transition-all duration-200 ${
+            className={`flex-1 cursor-pointer rounded-full border py-2 text-sm font-medium transition-all duration-200 ${
               tab === t
-                ? "bg-menu-selected text-title shadow-sm"
-                : "text-body-secondary hover:text-title"
+                ? "border-border/40 bg-menu-selected text-title shadow-sm"
+                : "border-transparent text-body-secondary hover:text-title"
             }`}
           >
             {t === "idea" ? "想法" : "歌词"}

@@ -199,7 +199,7 @@ export const HistorySidebar = ({ open, onClose, onPlay, onSelect, onEdit, onDown
                         onClick={(e) => { e.stopPropagation(); onPlay(track); }}
                         className="rounded-full p-1.5 text-body-secondary hover:text-title hover:bg-hover-bg transition-colors"
                       >
-                        <Play className="h-4 w-4" />
+                        {currentTrackId === track.id && isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
                       </button>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>

@@ -9,6 +9,7 @@ interface Props {
   setIsOptimizing: (v: boolean) => void;
   tab: "idea" | "lyrics";
   setTab: (v: "idea" | "lyrics") => void;
+  onSubmit?: () => void;
 }
 
 const fakeOptimizedIdeas = [

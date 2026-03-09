@@ -61,8 +61,8 @@ const AIAudio = () => {
         </div>
       </header>
 
-      {/* Main content – vertically centered on desktop */}
-      <div className="flex flex-1 items-start lg:items-center justify-center px-4 py-6 md:px-6">
+      {/* Main content – left column top-aligned, right fills remaining */}
+      <div className="flex-1 px-4 py-6 md:px-6 pb-20">
         <div className="grid w-full max-w-6xl gap-6 lg:grid-cols-[280px_1fr]">
           {/* Left column – generation panel */}
           <div className="space-y-5">

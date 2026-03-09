@@ -1,4 +1,4 @@
-import { Headphones, FileText, Mic, Music, Play, Pause } from "lucide-react";
+import { Headphones, FileText, Mic, Music, Play, Pause, Wand2 } from "lucide-react";
 import type { Track } from "@/pages/AIAudio";
 
 import cover1 from "@/assets/cover1.jpg";
@@ -24,11 +24,12 @@ const features = [
 
 interface Props {
   onPlay: (track: Track) => void;
+  onCreateFrom: (track: Track) => void;
   currentTrack: Track | null;
   isPlaying: boolean;
 }
 
-export const ExploreCards = ({ onPlay, currentTrack, isPlaying }: Props) => {
+export const ExploreCards = ({ onPlay, onCreateFrom, currentTrack, isPlaying }: Props) => {
   return (
     <div className="space-y-6">
       {/* Welcome banner */}
@@ -59,9 +60,16 @@ export const ExploreCards = ({ onPlay, currentTrack, isPlaying }: Props) => {
                     alt={track.title}
                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
-                  <div className={`absolute inset-0 flex items-end justify-end p-2 transition-opacity duration-200 ${
+                  <div className={`absolute inset-0 flex items-end justify-end p-2 gap-1.5 transition-opacity duration-200 ${
                     active ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                   }`}>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); onCreateFrom(track); }}
+                      className="flex h-8 w-8 items-center justify-center rounded-full bg-card/90 text-title shadow-lg hover:bg-card transition-colors"
+                      title="创作你自己的歌曲"
+                    >
+                      <Wand2 className="h-4 w-4" />
+                    </button>
                     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg">
                       {active ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4 ml-0.5" />}
                     </div>

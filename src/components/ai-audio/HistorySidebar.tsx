@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Play, MoreHorizontal, Trash2 } from "lucide-react";
+import { X, Play, MoreHorizontal, Trash2, Download, Pencil } from "lucide-react";
 import cover1 from "@/assets/cover1.jpg";
 import cover2 from "@/assets/cover2.jpg";
 import cover3 from "@/assets/cover3.jpg";
@@ -121,9 +121,11 @@ interface Props {
   onClose: () => void;
   onPlay: (track: HistoryTrack) => void;
   onSelect: (track: HistoryTrack) => void;
+  onEdit: (track: HistoryTrack) => void;
+  onDownload: (track: HistoryTrack) => void;
 }
 
-export const HistorySidebar = ({ open, onClose, onPlay, onSelect }: Props) => {
+export const HistorySidebar = ({ open, onClose, onPlay, onSelect, onEdit, onDownload }: Props) => {
   const [tracks, setTracks] = useState(mockHistory);
   const [deleteTarget, setDeleteTarget] = useState<HistoryTrack | null>(null);
 
@@ -207,6 +209,20 @@ export const HistorySidebar = ({ open, onClose, onPlay, onSelect }: Props) => {
                           </button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
+                          <DropdownMenuItem
+                            onClick={(e) => { e.stopPropagation(); onEdit(track); }}
+                            className="cursor-pointer"
+                          >
+                            <Pencil className="h-4 w-4 mr-2" />
+                            编辑
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={(e) => { e.stopPropagation(); onDownload(track); }}
+                            className="cursor-pointer"
+                          >
+                            <Download className="h-4 w-4 mr-2" />
+                            下载
+                          </DropdownMenuItem>
                           <DropdownMenuItem 
                             onClick={(e) => { e.stopPropagation(); setDeleteTarget(track); }}
                             className="text-destructive focus:text-destructive cursor-pointer"

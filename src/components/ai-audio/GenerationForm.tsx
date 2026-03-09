@@ -9,6 +9,7 @@ interface Props {
   setIsOptimizing: (v: boolean) => void;
   tab: "idea" | "lyrics";
   setTab: (v: "idea" | "lyrics") => void;
+  onSubmit?: () => void;
 }
 
 const fakeOptimizedIdeas = [
@@ -48,7 +49,7 @@ const fakeOptimizedLyrics = [
 每段旅程都值得记录`,
 ];
 
-export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizing, setIsOptimizing, tab, setTab }: Props) => {
+export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizing, setIsOptimizing, tab, setTab, onSubmit }: Props) => {
   const maxLen = tab === "lyrics" ? 3000 : 200;
   const optimizerLabel = tab === "lyrics" ? "歌词优化器" : "创意优化器";
   const canCreate = styleInput.trim().length > 0 && textInput.trim().length > 0 && !isOptimizing;
@@ -120,7 +121,7 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
       </div>
 
       {/* Create button */}
-      <Button variant="gradient" className="w-full" size="lg" disabled={!canCreate}>
+      <Button variant="gradient" className="w-full" size="lg" disabled={!canCreate} onClick={onSubmit}>
         {"创建 ★20"}
       </Button>
     </div>

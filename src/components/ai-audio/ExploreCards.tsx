@@ -24,6 +24,7 @@ const features = [
 
 interface Props {
   onPlay: (track: Track) => void;
+  onCreateFrom: (track: Track) => void;
   currentTrack: Track | null;
   isPlaying: boolean;
 }

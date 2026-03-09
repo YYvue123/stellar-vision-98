@@ -44,7 +44,7 @@ const AIAudio = () => {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       {/* Top bar */}
-      <header className="sticky top-0 z-10 flex items-center justify-between border-b border-border/40 bg-background/80 px-4 py-3 backdrop-blur-sm md:px-6">
+      <header className="sticky top-0 z-10 flex h-12 items-center justify-between border-b border-border/40 bg-background/80 px-4 backdrop-blur-sm md:px-6">
         <h1 className="text-lg font-semibold text-title">音乐生成</h1>
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" onClick={() => navigate("/")} className="gap-1.5 text-body-secondary">
@@ -65,7 +65,7 @@ const AIAudio = () => {
       <div className="flex flex-1 pb-20">
         <div className="flex w-full lg:flex-row flex-col">
           {/* Left column – generation panel */}
-          <div className="w-full lg:w-[320px] flex-shrink-0 space-y-6 bg-bg-2 p-4 md:p-5">
+          <div className="w-full lg:w-[320px] lg:min-h-[calc(100vh-48px)] flex-shrink-0 space-y-6 bg-bg-2 p-4 md:p-5">
             {/* Model selector */}
             <div>
               <div className="mb-3 flex items-center justify-between">

@@ -27,17 +27,17 @@ export const StyleTagList = ({ styleInput, setStyleInput, onTagClick }: Props) =
   };
 
   return (
-    <div className="rounded-lg border border-border/40 bg-card-secondary overflow-hidden">
-      {/* Resizable textarea */}
+    <div className="relative rounded-lg border border-border/40 bg-card-secondary">
+      {/* Textarea – hide native resize, we control resize on the wrapper */}
       <textarea
         value={styleInput}
         onChange={(e) => setStyleInput(e.target.value)}
         rows={3}
         placeholder="输入或选择音乐风格..."
-        className="w-full bg-transparent p-3 text-sm text-title placeholder:text-body-caption focus:outline-none resize-y min-h-[60px] border-none"
+        className="w-full bg-transparent p-3 pb-1 text-sm text-title placeholder:text-body-caption focus:outline-none resize-none border-none"
       />
 
-      {/* Tags row inside the box */}
+      {/* Tags + refresh row at bottom */}
       <div className="flex items-center gap-1.5 px-2 pb-2">
         <div className="flex-1 overflow-x-auto min-w-0 style-tags-scroll">
           <div className="flex items-center gap-1.5">
@@ -59,6 +59,32 @@ export const StyleTagList = ({ styleInput, setStyleInput, onTagClick }: Props) =
         >
           <RefreshCw className="h-3.5 w-3.5" />
         </button>
+      </div>
+
+      {/* Resize handle at bottom-right */}
+      <div
+        className="absolute bottom-0 right-0 w-4 h-4 cursor-ns-resize flex items-end justify-end pr-1 pb-1 text-body-caption"
+        onMouseDown={(e) => {
+          e.preventDefault();
+          const container = e.currentTarget.parentElement;
+          if (!container) return;
+          const startY = e.clientY;
+          const startH = container.offsetHeight;
+          const onMove = (ev: MouseEvent) => {
+            const newH = Math.max(100, startH + ev.clientY - startY);
+            container.style.height = `${newH}px`;
+          };
+          const onUp = () => {
+            document.removeEventListener("mousemove", onMove);
+            document.removeEventListener("mouseup", onUp);
+          };
+          document.addEventListener("mousemove", onMove);
+          document.addEventListener("mouseup", onUp);
+        }}
+      >
+        <svg width="8" height="8" viewBox="0 0 8 8" className="text-body-caption">
+          <path d="M7 1L1 7M7 4L4 7M7 7L7 7" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+        </svg>
       </div>
     </div>
   );

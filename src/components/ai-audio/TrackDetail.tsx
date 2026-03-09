@@ -1,4 +1,4 @@
-import { Play, Pause, Pencil, Download, Loader2 } from "lucide-react";
+import { Play, Pause, Pencil, Download, Music, Headphones, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export interface TrackDetailData {

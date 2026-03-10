@@ -1,5 +1,14 @@
 import { useState } from "react";
 import { X, Play, Pause, MoreHorizontal, Trash2, Download, Pencil } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Button } from "@/components/ui/button";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerFooter,
+} from "@/components/ui/drawer";
 import cover1 from "@/assets/cover1.jpg";
 import cover2 from "@/assets/cover2.jpg";
 import cover3 from "@/assets/cover3.jpg";

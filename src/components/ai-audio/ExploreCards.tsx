@@ -1,5 +1,6 @@
 import { Headphones, FileText, Mic, Music, Play, Pause, Wand2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Skeleton } from "@/components/ui/skeleton";
 import type { Track } from "@/pages/AIAudio";
 
 import cover1 from "@/assets/cover1.jpg";

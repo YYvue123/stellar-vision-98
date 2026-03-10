@@ -112,6 +112,7 @@ const AIAudio = () => {
         artist: "tfy1951",
         duration: "3:26",
       });
+      toast.success("创作完成！", { description: "你的音乐已生成成功" });
     }, 3000);
   };
 

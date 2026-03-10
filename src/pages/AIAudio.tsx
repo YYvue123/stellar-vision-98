@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@/components/ThemeProvider";
 import { Sun, Moon, Home, Clock } from "lucide-react";

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@/components/ThemeProvider";
 import { Sun, Moon, Home, Clock } from "lucide-react";
@@ -111,6 +112,7 @@ const AIAudio = () => {
         artist: "tfy1951",
         duration: "3:26",
       });
+      toast.success("创作完成！", { description: "你的音乐已生成成功" });
     }, 3000);
   };
 

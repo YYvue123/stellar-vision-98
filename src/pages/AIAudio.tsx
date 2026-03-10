@@ -231,7 +231,7 @@ const AIAudio = () => {
             ) : (
               <div className="flex flex-1 items-center justify-center">
                 <div className="w-full max-w-[1056px]">
-                  <ExploreCards onPlay={handlePlay} onCreateFrom={handleCreateFrom} currentTrack={currentTrack} isPlaying={isPlaying} />
+                  <ExploreCards onPlay={handlePlay} onCreateFrom={handleCreateFrom} currentTrack={currentTrack} isPlaying={isPlaying} isLoading={false} />
                 </div>
               </div>
             )}

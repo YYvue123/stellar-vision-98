@@ -29,9 +29,43 @@ interface Props {
   onCreateFrom: (track: Track) => void;
   currentTrack: Track | null;
   isPlaying: boolean;
+  isLoading?: boolean;
 }
 
-export const ExploreCards = ({ onPlay, onCreateFrom, currentTrack, isPlaying }: Props) => {
+const ExploreCardsSkeleton = () => (
+  <div className="space-y-6">
+    <div className="flex flex-col items-center py-8 gap-2">
+      <Skeleton className="h-7 w-48" />
+      <Skeleton className="h-4 w-64" />
+    </div>
+    <div className="rounded-xl border border-border/40 bg-card p-5">
+      <Skeleton className="mb-4 h-5 w-12" />
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-5">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i} className="flex gap-3 sm:block">
+            <Skeleton className="aspect-square w-20 sm:w-full rounded-xl flex-shrink-0" />
+            <div className="flex flex-1 items-center sm:block min-w-0">
+              <Skeleton className="sm:mt-2 h-4 w-24" />
+              <Skeleton className="mt-1 h-3 w-14" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div key={i} className="rounded-xl border border-border/40 bg-card p-4">
+          <Skeleton className="mb-3 h-10 w-10 rounded-lg" />
+          <Skeleton className="h-4 w-16" />
+          <Skeleton className="mt-1 h-3 w-24" />
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+export const ExploreCards = ({ onPlay, onCreateFrom, currentTrack, isPlaying, isLoading }: Props) => {
+  if (isLoading) return <ExploreCardsSkeleton />;
   return (
     <TooltipProvider delayDuration={300}>
       <div className="space-y-6">

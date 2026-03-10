@@ -1,5 +1,14 @@
 import { useState } from "react";
 import { X, Play, Pause, MoreHorizontal, Trash2, Download, Pencil } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Button } from "@/components/ui/button";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerFooter,
+} from "@/components/ui/drawer";
 import cover1 from "@/assets/cover1.jpg";
 import cover2 from "@/assets/cover2.jpg";
 import cover3 from "@/assets/cover3.jpg";
@@ -129,6 +138,7 @@ interface Props {
 
 export const HistorySidebar = ({ open, onClose, onPlay, onSelect, onEdit, onDownload, currentTrackId, isPlaying }: Props) => {
   const [tracks, setTracks] = useState(mockHistory);
+  const isMobile = useIsMobile();
   const [deleteTarget, setDeleteTarget] = useState<HistoryTrack | null>(null);
 
   // Group by date
@@ -253,23 +263,44 @@ export const HistorySidebar = ({ open, onClose, onPlay, onSelect, onEdit, onDown
         </div>
       </div>
 
-      {/* Delete confirmation dialog */}
-      <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>确认删除</AlertDialogTitle>
-            <AlertDialogDescription>
+      {/* Delete confirmation */}
+      {isMobile ? (
+        <Drawer open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>确认删除</DrawerTitle>
+            </DrawerHeader>
+            <div className="px-4 pb-2 text-sm text-body-secondary">
               确定要删除「{deleteTarget?.title}」吗？此操作无法撤销。
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>取消</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-              删除
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            </div>
+            <DrawerFooter className="flex-row gap-2">
+              <Button variant="outline" className="flex-1" onClick={() => setDeleteTarget(null)}>
+                取消
+              </Button>
+              <Button variant="destructive" className="flex-1" onClick={handleDelete}>
+                删除
+              </Button>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      ) : (
+        <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>确认删除</AlertDialogTitle>
+              <AlertDialogDescription>
+                确定要删除「{deleteTarget?.title}」吗？此操作无法撤销。
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>取消</AlertDialogCancel>
+              <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                删除
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      )}
     </>
   );
 };

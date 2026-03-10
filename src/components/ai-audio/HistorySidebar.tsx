@@ -138,6 +138,7 @@ interface Props {
 
 export const HistorySidebar = ({ open, onClose, onPlay, onSelect, onEdit, onDownload, currentTrackId, isPlaying }: Props) => {
   const [tracks, setTracks] = useState(mockHistory);
+  const isMobile = useIsMobile();
   const [deleteTarget, setDeleteTarget] = useState<HistoryTrack | null>(null);
 
   // Group by date

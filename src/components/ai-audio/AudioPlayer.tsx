@@ -45,7 +45,7 @@ export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose, onSkipBac
 
             {/* Controls */}
             <div className="flex items-center gap-3">
-              <button className="cursor-pointer text-body-secondary transition-colors hover:text-title">
+              <button onClick={onSkipBack} className="cursor-pointer text-body-secondary transition-colors hover:text-title">
                 <SkipBack className="h-4 w-4" />
               </button>
               <button

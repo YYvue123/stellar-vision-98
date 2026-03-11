@@ -42,7 +42,7 @@ export interface HistoryTrack {
   promptType: "idea" | "lyrics";
 }
 
-const mockHistory: HistoryTrack[] = [
+export const mockHistory: HistoryTrack[] = [
   { 
     id: "1", 
     title: "First Light Of The Year", 

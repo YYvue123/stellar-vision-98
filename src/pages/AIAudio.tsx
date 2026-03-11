@@ -8,7 +8,7 @@ import { StyleTagList } from "@/components/ai-audio/StyleTagList";
 import { GenerationForm } from "@/components/ai-audio/GenerationForm";
 import { ExploreCards } from "@/components/ai-audio/ExploreCards";
 import { AudioPlayer } from "@/components/ai-audio/AudioPlayer";
-import { HistorySidebar, HistoryTrack } from "@/components/ai-audio/HistorySidebar";
+import { HistorySidebar, HistoryTrack, mockHistory } from "@/components/ai-audio/HistorySidebar";
 import { TrackDetail, TrackDetailData } from "@/components/ai-audio/TrackDetail";
 import { EditTrackDialog } from "@/components/ai-audio/EditTrackDialog";
 import cover1 from "@/assets/cover1.jpg";
@@ -274,6 +274,22 @@ const AIAudio = () => {
           isPlaying={isPlaying}
           onTogglePlay={() => setIsPlaying(!isPlaying)}
           onClose={() => { setCurrentTrack(null); setIsPlaying(false); }}
+          onSkipBack={() => {
+            const idx = mockHistory.findIndex((t) => t.id === currentTrack.id);
+            const prev = mockHistory[idx > 0 ? idx - 1 : mockHistory.length - 1];
+            if (prev) {
+              setCurrentTrack({ id: prev.id, title: prev.title, genre: prev.genre, cover: prev.cover });
+              setIsPlaying(true);
+            }
+          }}
+          onSkipForward={() => {
+            const idx = mockHistory.findIndex((t) => t.id === currentTrack.id);
+            const next = mockHistory[idx < mockHistory.length - 1 ? idx + 1 : 0];
+            if (next) {
+              setCurrentTrack({ id: next.id, title: next.title, genre: next.genre, cover: next.cover });
+              setIsPlaying(true);
+            }
+          }}
         />
       )}
 

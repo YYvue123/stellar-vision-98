@@ -7,9 +7,11 @@ interface Props {
   isPlaying: boolean;
   onTogglePlay: () => void;
   onClose: () => void;
+  onSkipBack: () => void;
+  onSkipForward: () => void;
 }
 
-export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose }: Props) => {
+export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose, onSkipBack, onSkipForward }: Props) => {
   const [volume, setVolume] = useState(80);
   const [prevVolume, setPrevVolume] = useState(80);
   const [showMobileVolume, setShowMobileVolume] = useState(false);
@@ -43,7 +45,7 @@ export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose }: Props) 
 
             {/* Controls */}
             <div className="flex items-center gap-3">
-              <button className="cursor-pointer text-body-secondary transition-colors hover:text-title">
+              <button onClick={onSkipBack} className="cursor-pointer text-body-secondary transition-colors hover:text-title">
                 <SkipBack className="h-4 w-4" />
               </button>
               <button
@@ -52,7 +54,7 @@ export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose }: Props) 
               >
                 {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4 ml-0.5" />}
               </button>
-              <button className="cursor-pointer text-body-secondary transition-colors hover:text-title">
+              <button onClick={onSkipForward} className="cursor-pointer text-body-secondary transition-colors hover:text-title">
                 <SkipForward className="h-4 w-4" />
               </button>
             </div>

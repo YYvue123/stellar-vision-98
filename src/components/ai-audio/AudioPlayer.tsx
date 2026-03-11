@@ -10,6 +10,18 @@ interface Props {
 }
 
 export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose }: Props) => {
+  const [volume, setVolume] = useState(80);
+  const [prevVolume, setPrevVolume] = useState(80);
+
+  const toggleMute = () => {
+    if (volume > 0) {
+      setPrevVolume(volume);
+      setVolume(0);
+    } else {
+      setVolume(prevVolume);
+    }
+  };
+
   return (
     <div className="fixed bottom-[68px] lg:bottom-4 left-0 right-0 z-50">
       {/* On large screens, offset to match right column; full width on mobile */}
@@ -56,7 +68,26 @@ export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose }: Props) 
               <div className="h-1 w-24 rounded-full bg-border overflow-hidden">
                 <div className="h-full w-1/3 rounded-full bg-primary" />
               </div>
-              <Volume2 className="h-4 w-4 text-body-secondary" />
+              <button onClick={toggleMute} className="cursor-pointer text-body-secondary transition-colors hover:text-title">
+                {volume === 0 ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+              </button>
+              <div className="relative w-20 h-4 flex items-center group">
+                <div className="absolute h-1 w-full rounded-full bg-border overflow-hidden">
+                  <div className="h-full rounded-full bg-primary" style={{ width: `${volume}%` }} />
+                </div>
+                <input
+                  type="range"
+                  min={0}
+                  max={100}
+                  value={volume}
+                  onChange={(e) => setVolume(Number(e.target.value))}
+                  className="absolute w-full h-full opacity-0 cursor-pointer"
+                />
+                <div
+                  className="absolute h-2.5 w-2.5 rounded-full bg-primary shadow-sm pointer-events-none transition-opacity opacity-0 group-hover:opacity-100"
+                  style={{ left: `calc(${volume}% - 5px)` }}
+                />
+              </div>
               <button onClick={onClose} className="cursor-pointer text-body-secondary transition-colors hover:text-title ml-2">
                 <X className="h-4 w-4" />
               </button>

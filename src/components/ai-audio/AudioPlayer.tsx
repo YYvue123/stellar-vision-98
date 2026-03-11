@@ -1,4 +1,5 @@
-import { Play, Pause, SkipBack, SkipForward, Volume2, X } from "lucide-react";
+import { useState } from "react";
+import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, X } from "lucide-react";
 import type { Track } from "@/pages/AIAudio";
 
 interface Props {

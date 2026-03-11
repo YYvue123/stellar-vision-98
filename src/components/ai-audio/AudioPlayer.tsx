@@ -11,7 +11,7 @@ interface Props {
   onSkipForward: () => void;
 }
 
-export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose }: Props) => {
+export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose, onSkipBack, onSkipForward }: Props) => {
   const [volume, setVolume] = useState(80);
   const [prevVolume, setPrevVolume] = useState(80);
   const [showMobileVolume, setShowMobileVolume] = useState(false);

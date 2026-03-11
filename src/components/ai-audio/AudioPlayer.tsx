@@ -54,7 +54,7 @@ export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose, onSkipBac
               >
                 {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4 ml-0.5" />}
               </button>
-              <button className="cursor-pointer text-body-secondary transition-colors hover:text-title">
+              <button onClick={onSkipForward} className="cursor-pointer text-body-secondary transition-colors hover:text-title">
                 <SkipForward className="h-4 w-4" />
               </button>
             </div>

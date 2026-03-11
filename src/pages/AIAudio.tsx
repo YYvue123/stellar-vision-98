@@ -8,7 +8,7 @@ import { StyleTagList } from "@/components/ai-audio/StyleTagList";
 import { GenerationForm } from "@/components/ai-audio/GenerationForm";
 import { ExploreCards } from "@/components/ai-audio/ExploreCards";
 import { AudioPlayer } from "@/components/ai-audio/AudioPlayer";
-import { HistorySidebar, HistoryTrack } from "@/components/ai-audio/HistorySidebar";
+import { HistorySidebar, HistoryTrack, mockHistory } from "@/components/ai-audio/HistorySidebar";
 import { TrackDetail, TrackDetailData } from "@/components/ai-audio/TrackDetail";
 import { EditTrackDialog } from "@/components/ai-audio/EditTrackDialog";
 import cover1 from "@/assets/cover1.jpg";

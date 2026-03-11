@@ -7,6 +7,8 @@ interface Props {
   isPlaying: boolean;
   onTogglePlay: () => void;
   onClose: () => void;
+  onSkipBack: () => void;
+  onSkipForward: () => void;
 }
 
 export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose }: Props) => {

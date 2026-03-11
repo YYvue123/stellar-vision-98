@@ -59,10 +59,10 @@ export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose }: Props) 
 
             {/* Mobile: volume + close */}
             <div className="flex sm:hidden items-center gap-2">
-              <div className="relative">
+              <div className="relative flex items-center">
                 <button
                   onClick={() => setShowMobileVolume(!showMobileVolume)}
-                  className="cursor-pointer text-body-secondary transition-colors hover:text-title"
+                  className="flex items-center justify-center cursor-pointer text-body-secondary transition-colors hover:text-title"
                 >
                   {volume === 0 ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
                 </button>
@@ -93,17 +93,13 @@ export const AudioPlayer = ({ track, isPlaying, onTogglePlay, onClose }: Props) 
                   </div>
                 )}
               </div>
-              <button onClick={onClose} className="cursor-pointer text-body-secondary transition-colors hover:text-title">
+              <button onClick={onClose} className="flex items-center justify-center cursor-pointer text-body-secondary transition-colors hover:text-title">
                 <X className="h-4 w-4" />
               </button>
             </div>
 
             {/* Desktop: progress + volume */}
             <div className="hidden sm:flex items-center gap-3 flex-1 justify-end">
-              <span className="text-xs text-body-caption">0:00 / 3:24</span>
-              <div className="h-1 w-24 rounded-full bg-border overflow-hidden">
-                <div className="h-full w-1/3 rounded-full bg-primary" />
-              </div>
               <button onClick={toggleMute} className="cursor-pointer text-body-secondary transition-colors hover:text-title">
                 {volume === 0 ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
               </button>

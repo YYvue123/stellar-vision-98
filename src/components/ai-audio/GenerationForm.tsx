@@ -11,6 +11,7 @@ interface Props {
   tab: "idea" | "lyrics";
   setTab: (v: "idea" | "lyrics") => void;
   onSubmit?: () => void;
+  pureMusic?: boolean;
 }
 
 const fakeOptimizedIdeas = [

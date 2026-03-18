@@ -1,4 +1,6 @@
-import { Play, Pause, Pencil, Download, Music, Headphones, Monitor } from "lucide-react";
+import { useState } from "react";
+import { Play, Pause, Pencil, Download, Music, Headphones, Monitor, ChevronDown, ChevronUp, Copy } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
 export interface TrackDetailData {

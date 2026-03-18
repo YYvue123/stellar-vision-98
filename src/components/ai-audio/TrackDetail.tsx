@@ -41,6 +41,8 @@ const MOCK_LYRICS = `在城市的霓虹灯下
 会不会遇见新的晴天`;
 
 export const TrackDetail = ({ track, isGenerating, isPlaying, onPlay, onEdit, onDownload, onBackgroundGenerate }: Props) => {
+  const [lyricsOpen, setLyricsOpen] = useState(true);
+
   if (isGenerating) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-5">

@@ -83,14 +83,14 @@ const AIAudio = () => {
     setTextInput(track.prompt);
     setPromptTab(track.promptType);
     // Show in right-side detail
-    setDetailTrack({
+    setDetailTracks([{
       id: track.id,
       title: track.title,
       genre: track.genre,
       cover: track.cover,
       artist: "tfy1951",
       duration: "3:26",
-    });
+    }]);
     // Scroll to track detail on mobile
     setTimeout(() => scrollToTrackDetail(), 100);
   };

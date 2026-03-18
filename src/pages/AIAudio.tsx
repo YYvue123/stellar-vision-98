@@ -99,7 +99,7 @@ const AIAudio = () => {
   };
 
   const handleCreate = () => {
-    if (!styleInput.trim() || !textInput.trim()) return;
+    if (!textInput.trim()) return;
     setIsGenerating(true);
     setDetailTrack(null);
     setTimeout(() => {
@@ -253,10 +253,10 @@ const AIAudio = () => {
       <div className="lg:hidden sticky bottom-0 z-10 border-t border-border/40 bg-background p-3">
         <Button 
           variant="gradient" 
-          className={`w-full ${(!styleInput.trim() || !textInput.trim() || isOptimizing) ? 'opacity-50' : ''}`}
+          className={`w-full ${(!textInput.trim() || isOptimizing) ? 'opacity-50' : ''}`}
           size="lg" 
           onClick={() => {
-            if (!styleInput.trim() || !textInput.trim() || isOptimizing) {
+            if (!textInput.trim() || isOptimizing) {
               const container = document.querySelector('.scrollbar-mobile');
               container?.scrollTo({ top: 0, behavior: 'smooth' });
               return;

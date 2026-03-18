@@ -38,20 +38,16 @@ export const StyleTagList = ({ styleInput, setStyleInput, onTagClick }: Props) =
           className="flex-1 w-full bg-transparent p-3 pb-1 text-sm text-title placeholder:text-body-caption focus:outline-none resize-none border-none prompt-textarea-scroll"
         />
 
-        <div className="flex items-center gap-1.5 px-2 pb-2 flex-shrink-0">
-          <div className="flex-1 overflow-x-auto min-w-0 style-tags-scroll">
-            <div className="flex items-center gap-1.5">
-              {pool.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => handleTagClick(s)}
-                  className="flex-shrink-0 cursor-pointer rounded-full border border-border/60 bg-card px-2.5 py-1 text-xs text-body-secondary transition-all duration-200 hover:bg-hover-bg hover:text-title"
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
+        <div className="flex flex-wrap items-center gap-1.5 px-2 pb-2 flex-shrink-0">
+            {pool.map((s) => (
+              <button
+                key={s}
+                onClick={() => handleTagClick(s)}
+                className="flex-shrink-0 cursor-pointer rounded-full border border-border/60 bg-card px-2.5 py-1 text-xs text-body-secondary transition-all duration-200 hover:bg-hover-bg hover:text-title"
+              >
+                {s}
+              </button>
+            ))}
           {styleInput.trim() && (
             <Tooltip>
               <TooltipTrigger asChild>

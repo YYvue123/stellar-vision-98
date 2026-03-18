@@ -38,6 +38,13 @@ const AIAudio = () => {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editTarget, setEditTarget] = useState<TrackDetailData | null>(null);
 
+  const scrollToTrackDetail = () => {
+    const el = document.getElementById('track-detail-area');
+    if (el && window.innerWidth < 1024) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const handleTagClick = (tag: string) => {
     setStyleInput((prev) => {
       const trimmed = prev.trim();

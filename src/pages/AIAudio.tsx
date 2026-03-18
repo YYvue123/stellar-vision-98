@@ -12,6 +12,7 @@ import { HistorySidebar, HistoryTrack, mockHistory } from "@/components/ai-audio
 import { TrackDetail, TrackDetailData } from "@/components/ai-audio/TrackDetail";
 import { EditTrackDialog } from "@/components/ai-audio/EditTrackDialog";
 import cover1 from "@/assets/cover1.jpg";
+import cover2 from "@/assets/cover2.jpg";
 
 export interface Track {
   id: string;
@@ -32,8 +33,7 @@ const AIAudio = () => {
   const [historyOpen, setHistoryOpen] = useState(false);
   const [promptTab, setPromptTab] = useState<"idea" | "lyrics">("idea");
 
-  // Right-side detail state
-  const [detailTrack, setDetailTrack] = useState<TrackDetailData | null>(null);
+  const [detailTracks, setDetailTracks] = useState<TrackDetailData[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editTarget, setEditTarget] = useState<TrackDetailData | null>(null);
@@ -83,14 +83,14 @@ const AIAudio = () => {
     setTextInput(track.prompt);
     setPromptTab(track.promptType);
     // Show in right-side detail
-    setDetailTrack({
+    setDetailTracks([{
       id: track.id,
       title: track.title,
       genre: track.genre,
       cover: track.cover,
       artist: "tfy1951",
       duration: "3:26",
-    });
+    }]);
     // Scroll to track detail on mobile
     setTimeout(() => scrollToTrackDetail(), 100);
   };
@@ -105,28 +105,36 @@ const AIAudio = () => {
   const handleCreate = () => {
     if (!textInput.trim()) return;
     setIsGenerating(true);
-    setDetailTrack(null);
+    setDetailTracks([]);
     setTimeout(() => {
       setIsGenerating(false);
-      setDetailTrack({
-        id: Date.now().toString(),
-        title: textInput.slice(0, 20) || "未命名作品",
-        genre: styleInput,
-        cover: cover1,
-        artist: "tfy1951",
-        duration: "3:26",
-      });
-      toast.success("创作完成！", { description: "你的音乐已生成成功" });
-      // Mobile: scroll to track detail
+      const now = Date.now();
+      setDetailTracks([
+        {
+          id: now.toString(),
+          title: textInput.slice(0, 20) || "未命名作品",
+          genre: styleInput,
+          cover: cover1,
+          artist: "tfy1951",
+          duration: "3:26",
+        },
+        {
+          id: (now + 1).toString(),
+          title: (textInput.slice(0, 18) || "未命名作品") + " V2",
+          genre: styleInput,
+          cover: cover2,
+          artist: "tfy1951",
+          duration: "3:42",
+        },
+      ]);
+      toast.success("创作完成！", { description: "已生成 2 首音乐" });
       setTimeout(() => scrollToTrackDetail(), 100);
     }, 3000);
   };
 
-  const handleDetailPlay = () => {
-    if (detailTrack) {
-      const t: Track = { id: detailTrack.id, title: detailTrack.title, genre: detailTrack.genre, cover: detailTrack.cover };
-      handlePlay(t);
-    }
+  const handleDetailPlay = (track: TrackDetailData) => {
+    const t: Track = { id: track.id, title: track.title, genre: track.genre, cover: track.cover };
+    handlePlay(t);
   };
 
   const handleEdit = (track: TrackDetailData) => {
@@ -159,7 +167,7 @@ const AIAudio = () => {
       <header className="sticky top-0 z-10 flex h-12 items-center justify-between border-b border-border/40 bg-background/80 px-4 backdrop-blur-sm md:px-6">
         <h1 className="text-lg font-semibold text-title">音乐生成</h1>
         <div className="flex items-center gap-2">
-          <button onClick={() => { setDetailTrack(null); setIsGenerating(false); setStyleInput(""); setTextInput(""); setPromptTab("idea"); setPureMusic(false); }} className="flex h-8 cursor-pointer items-center gap-2 rounded-full border border-border/60 px-3 text-body-secondary transition-colors hover:bg-hover-bg hover:text-title">
+          <button onClick={() => { setDetailTracks([]); setIsGenerating(false); setStyleInput(""); setTextInput(""); setPromptTab("idea"); setPureMusic(false); }} className="flex h-8 cursor-pointer items-center gap-2 rounded-full border border-border/60 px-3 text-body-secondary transition-colors hover:bg-hover-bg hover:text-title">
             <Home className="h-4 w-4" />
             <span className="hidden sm:inline text-sm">首页</span>
           </button>
@@ -229,18 +237,19 @@ const AIAudio = () => {
 
           {/* Right column */}
           <div id="track-detail-area" className="flex flex-1 flex-col lg:overflow-y-auto lg:scrollbar-thin p-4 md:p-6">
-            {(isGenerating || detailTrack) ? (
+            {(isGenerating || detailTracks.length > 0) ? (
               <div className="w-full max-w-[1056px] mx-auto flex flex-1 flex-col">
                 <TrackDetail
-                  track={detailTrack}
+                  tracks={detailTracks}
                   isGenerating={isGenerating}
-                  isPlaying={isPlaying && currentTrack?.id === detailTrack?.id}
+                  currentPlayingId={currentTrack?.id}
+                  isPlaying={isPlaying}
                   onPlay={handleDetailPlay}
-                  onEdit={() => detailTrack && handleEdit(detailTrack)}
-                  onDownload={() => detailTrack && handleDownload(detailTrack)}
+                  onEdit={handleEdit}
+                  onDownload={handleDownload}
                   onBackgroundGenerate={() => {
                     setIsGenerating(false);
-                    setDetailTrack(null);
+                    setDetailTracks([]);
                   }}
                 />
               </div>
@@ -317,8 +326,8 @@ const AIAudio = () => {
         onClose={() => setEditDialogOpen(false)}
         track={editTarget}
         onSave={(data) => {
-          if (detailTrack && editTarget?.id === detailTrack.id) {
-            setDetailTrack({ ...detailTrack, title: data.title });
+          if (editTarget) {
+            setDetailTracks(prev => prev.map(t => t.id === editTarget.id ? { ...t, title: data.title } : t));
           }
         }}
       />

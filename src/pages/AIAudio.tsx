@@ -105,28 +105,36 @@ const AIAudio = () => {
   const handleCreate = () => {
     if (!textInput.trim()) return;
     setIsGenerating(true);
-    setDetailTrack(null);
+    setDetailTracks([]);
     setTimeout(() => {
       setIsGenerating(false);
-      setDetailTrack({
-        id: Date.now().toString(),
-        title: textInput.slice(0, 20) || "未命名作品",
-        genre: styleInput,
-        cover: cover1,
-        artist: "tfy1951",
-        duration: "3:26",
-      });
-      toast.success("创作完成！", { description: "你的音乐已生成成功" });
-      // Mobile: scroll to track detail
+      const now = Date.now();
+      setDetailTracks([
+        {
+          id: now.toString(),
+          title: textInput.slice(0, 20) || "未命名作品",
+          genre: styleInput,
+          cover: cover1,
+          artist: "tfy1951",
+          duration: "3:26",
+        },
+        {
+          id: (now + 1).toString(),
+          title: (textInput.slice(0, 18) || "未命名作品") + " V2",
+          genre: styleInput,
+          cover: cover2,
+          artist: "tfy1951",
+          duration: "3:42",
+        },
+      ]);
+      toast.success("创作完成！", { description: "已生成 2 首音乐" });
       setTimeout(() => scrollToTrackDetail(), 100);
     }, 3000);
   };
 
-  const handleDetailPlay = () => {
-    if (detailTrack) {
-      const t: Track = { id: detailTrack.id, title: detailTrack.title, genre: detailTrack.genre, cover: detailTrack.cover };
-      handlePlay(t);
-    }
+  const handleDetailPlay = (track: TrackDetailData) => {
+    const t: Track = { id: track.id, title: track.title, genre: track.genre, cover: track.cover };
+    handlePlay(t);
   };
 
   const handleEdit = (track: TrackDetailData) => {

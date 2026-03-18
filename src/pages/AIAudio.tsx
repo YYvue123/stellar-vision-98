@@ -33,8 +33,7 @@ const AIAudio = () => {
   const [historyOpen, setHistoryOpen] = useState(false);
   const [promptTab, setPromptTab] = useState<"idea" | "lyrics">("idea");
 
-  // Right-side detail state
-  const [detailTrack, setDetailTrack] = useState<TrackDetailData | null>(null);
+  const [detailTracks, setDetailTracks] = useState<TrackDetailData[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editTarget, setEditTarget] = useState<TrackDetailData | null>(null);

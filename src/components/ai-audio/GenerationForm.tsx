@@ -104,7 +104,7 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
               if (e.target.value.length <= maxLen) setTextInput(e.target.value);
             }}
             disabled={isLyricsDisabled}
-            rows={4}
+            rows={5}
             placeholder={
               isLyricsDisabled
                 ? "纯音乐模式下不支持歌词输入"

@@ -69,14 +69,26 @@ export const TrackDetail = ({ track, isGenerating, isPlaying, onPlay, onEdit, on
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold text-title truncate">{track.title}</h2>
         <div className="flex items-center gap-2 flex-shrink-0">
-          <Button variant="outline" size="sm" className="gap-2" onClick={onEdit}>
-            <Pencil className="h-4 w-4" />
-            编辑
-          </Button>
-          <Button variant="gradient" size="sm" className="gap-2" onClick={onDownload}>
-            <Download className="h-4 w-4" />
-            下载
-          </Button>
+          <TooltipProvider delayDuration={300}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline" size="icon" className="h-9 w-9" onClick={onEdit}>
+                  <Pencil className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>编辑</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <TooltipProvider delayDuration={300}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="gradient" size="icon" className="h-9 w-9" onClick={onDownload}>
+                  <Download className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>下载</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </div>
 

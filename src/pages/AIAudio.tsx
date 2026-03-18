@@ -38,6 +38,13 @@ const AIAudio = () => {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editTarget, setEditTarget] = useState<TrackDetailData | null>(null);
 
+  const scrollToTrackDetail = () => {
+    const el = document.getElementById('track-detail-area');
+    if (el && window.innerWidth < 1024) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const handleTagClick = (tag: string) => {
     setStyleInput((prev) => {
       const trimmed = prev.trim();
@@ -84,11 +91,8 @@ const AIAudio = () => {
       artist: "tfy1951",
       duration: "3:26",
     });
-    // Scroll to top on mobile
-    setTimeout(() => {
-      const container = document.querySelector('.scrollbar-mobile');
-      container?.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
+    // Scroll to track detail on mobile
+    setTimeout(() => scrollToTrackDetail(), 100);
   };
 
   const handleCreateFrom = (track: Track) => {
@@ -113,6 +117,8 @@ const AIAudio = () => {
         duration: "3:26",
       });
       toast.success("创作完成！", { description: "你的音乐已生成成功" });
+      // Mobile: scroll to track detail
+      setTimeout(() => scrollToTrackDetail(), 100);
     }, 3000);
   };
 
@@ -222,7 +228,7 @@ const AIAudio = () => {
           </div>
 
           {/* Right column */}
-          <div className="flex flex-1 flex-col lg:overflow-y-auto lg:scrollbar-thin p-4 md:p-6">
+          <div id="track-detail-area" className="flex flex-1 flex-col lg:overflow-y-auto lg:scrollbar-thin p-4 md:p-6">
             {(isGenerating || detailTrack) ? (
               <div className="w-full max-w-[1056px] mx-auto flex flex-1 flex-col">
                 <TrackDetail
@@ -262,14 +268,8 @@ const AIAudio = () => {
               return;
             }
             handleCreate();
-            // Scroll to generated content area after a short delay
-            setTimeout(() => {
-              const container = document.querySelector('.scrollbar-mobile');
-              const rightCol = container?.querySelector('.flex-1');
-              if (rightCol) {
-                (rightCol as HTMLElement).scrollIntoView({ behavior: 'smooth' });
-              }
-            }, 100);
+            // Scroll to generating area
+            setTimeout(() => scrollToTrackDetail(), 100);
           }}
         >
           {"创建 ★20"}

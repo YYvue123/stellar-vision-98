@@ -132,7 +132,7 @@ const TrackCard = ({
       </div>
 
       {/* Lyrics */}
-      <div className="border-t border-border/40 pt-3 rounded-b-xl bg-muted/30 px-4 pb-3">
+      <div className="rounded-b-xl bg-muted/30 px-4 py-3">
         <div className="flex items-center justify-between">
           <button
             className="flex items-center gap-1.5 cursor-pointer text-sm font-semibold text-title hover:text-primary transition-colors"

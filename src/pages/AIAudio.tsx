@@ -99,7 +99,7 @@ const AIAudio = () => {
   };
 
   const handleCreate = () => {
-    if (!styleInput.trim() || !textInput.trim()) return;
+    if (!textInput.trim()) return;
     setIsGenerating(true);
     setDetailTrack(null);
     setTimeout(() => {

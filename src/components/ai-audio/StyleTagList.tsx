@@ -29,7 +29,7 @@ export const StyleTagList = ({ styleInput, setStyleInput, onTagClick }: Props) =
 
   return (
     <TooltipProvider delayDuration={300}>
-      <div className="relative flex flex-col rounded-lg border border-border/40 bg-card-secondary resize-y overflow-hidden min-h-[120px] input-area-focus">
+      <div className="relative flex flex-col rounded-lg border border-border/40 bg-card-secondary resize-y overflow-hidden min-h-[150px] input-area-focus">
         <textarea
           value={styleInput}
           onChange={(e) => setStyleInput(e.target.value)}

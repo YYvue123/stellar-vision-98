@@ -80,12 +80,15 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
           {(["idea", "lyrics"] as const).map((t) => (
             <button
               key={t}
-              onClick={() => { setTab(t); setTextInput(""); }}
+              onClick={() => { if (pureMusic && t === "lyrics") return; setTab(t); setTextInput(""); }}
               className={`flex-1 cursor-pointer rounded-full border py-2 text-sm font-medium transition-all duration-200 ${
-                tab === t
-                  ? "border-border/40 bg-menu-selected text-title shadow-sm"
-                  : "border-transparent text-body-secondary hover:text-title"
+                pureMusic && t === "lyrics"
+                  ? "border-transparent text-body-caption opacity-50 cursor-not-allowed"
+                  : tab === t
+                    ? "border-border/40 bg-menu-selected text-title shadow-sm"
+                    : "border-transparent text-body-secondary hover:text-title"
               }`}
+              disabled={pureMusic && t === "lyrics"}
             >
               {t === "idea" ? "想法" : "歌词"}
             </button>
@@ -93,19 +96,23 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
         </div>
 
         {/* Textarea */}
-        <div className="rounded-lg border border-border/40 bg-card-secondary p-3 input-area-focus">
+        <div className={`rounded-lg border border-border/40 bg-card-secondary p-3 input-area-focus ${isLyricsDisabled ? 'opacity-50' : ''}`}>
           <textarea
-            value={textInput}
+            value={isLyricsDisabled ? "" : textInput}
             onChange={(e) => {
+              if (isLyricsDisabled) return;
               if (e.target.value.length <= maxLen) setTextInput(e.target.value);
             }}
+            disabled={isLyricsDisabled}
             rows={4}
             placeholder={
-              tab === "idea"
-                ? "你想唱什么？写下你的感受、故事或句子——我会把它变成歌词！🎨"
-                : "在这里输入歌词内容..."
+              isLyricsDisabled
+                ? "纯音乐模式下不支持歌词输入"
+                : tab === "idea"
+                  ? "你想唱什么？写下你的感受、故事或句子——我会把它变成歌词！🎨"
+                  : "在这里输入歌词内容..."
             }
-            className="w-full resize-none bg-transparent text-sm text-title placeholder:text-body-caption focus:outline-none prompt-textarea-scroll"
+            className="w-full resize-vertical bg-transparent text-sm text-title placeholder:text-body-caption focus:outline-none prompt-textarea-scroll disabled:cursor-not-allowed"
           />
           <div className="mt-2 flex items-center justify-between text-xs text-body-caption">
             <div className="flex items-center gap-1.5">

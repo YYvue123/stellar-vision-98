@@ -132,21 +132,22 @@ const TrackCard = ({
       </div>
 
       {/* Lyrics */}
-      <div className="rounded-b-xl bg-muted/30 px-4 py-3">
-        <div className="flex items-center justify-between">
-          <button
-            className="flex items-center gap-1.5 cursor-pointer text-sm font-semibold text-title hover:text-primary transition-colors"
-            onClick={() => setLyricsOpen(!lyricsOpen)}
-          >
+      <div className="rounded-xl bg-muted/30 overflow-hidden">
+        <div
+          className="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-muted/50 transition-colors"
+          onClick={() => setLyricsOpen(!lyricsOpen)}
+        >
+          <span className="flex items-center gap-1.5 text-sm font-semibold text-title">
             {lyricsOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
             歌词
-          </button>
+          </span>
           <TooltipProvider delayDuration={300}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <button
                   className="flex items-center justify-center h-7 w-7 rounded-md cursor-pointer text-body-secondary hover:text-title hover:bg-hover-bg transition-colors"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     navigator.clipboard.writeText(lyrics);
                     toast.success("歌词已复制到剪贴板");
                   }}
@@ -159,7 +160,7 @@ const TrackCard = ({
           </TooltipProvider>
         </div>
         {lyricsOpen && (
-          <div className="max-h-48 overflow-y-auto lyrics-scroll mt-2">
+          <div className="max-h-48 overflow-y-auto lyrics-scroll px-4 pb-3">
             <pre className="text-sm text-body-secondary whitespace-pre-wrap font-sans leading-relaxed">
               {lyrics}
             </pre>

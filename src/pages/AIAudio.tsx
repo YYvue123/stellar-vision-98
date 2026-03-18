@@ -91,11 +91,8 @@ const AIAudio = () => {
       artist: "tfy1951",
       duration: "3:26",
     });
-    // Scroll to top on mobile
-    setTimeout(() => {
-      const container = document.querySelector('.scrollbar-mobile');
-      container?.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
+    // Scroll to track detail on mobile
+    setTimeout(() => scrollToTrackDetail(), 100);
   };
 
   const handleCreateFrom = (track: Track) => {

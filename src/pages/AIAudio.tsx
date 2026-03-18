@@ -326,8 +326,8 @@ const AIAudio = () => {
         onClose={() => setEditDialogOpen(false)}
         track={editTarget}
         onSave={(data) => {
-          if (detailTrack && editTarget?.id === detailTrack.id) {
-            setDetailTrack({ ...detailTrack, title: data.title });
+          if (editTarget) {
+            setDetailTracks(prev => prev.map(t => t.id === editTarget.id ? { ...t, title: data.title } : t));
           }
         }}
       />

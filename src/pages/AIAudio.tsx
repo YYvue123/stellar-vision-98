@@ -113,6 +113,8 @@ const AIAudio = () => {
         duration: "3:26",
       });
       toast.success("创作完成！", { description: "你的音乐已生成成功" });
+      // Mobile: scroll to track detail
+      setTimeout(() => scrollToTrackDetail(), 100);
     }, 3000);
   };
 

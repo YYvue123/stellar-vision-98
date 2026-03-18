@@ -1,4 +1,6 @@
-import { Play, Pause, Pencil, Download, Music, Headphones, Monitor } from "lucide-react";
+import { useState } from "react";
+import { Play, Pause, Pencil, Download, Music, Headphones, Monitor, ChevronDown, ChevronUp, Copy } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
 export interface TrackDetailData {
@@ -39,6 +41,8 @@ const MOCK_LYRICS = `在城市的霓虹灯下
 会不会遇见新的晴天`;
 
 export const TrackDetail = ({ track, isGenerating, isPlaying, onPlay, onEdit, onDownload, onBackgroundGenerate }: Props) => {
+  const [lyricsOpen, setLyricsOpen] = useState(true);
+
   if (isGenerating) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-5">
@@ -98,12 +102,32 @@ export const TrackDetail = ({ track, isGenerating, isPlaying, onPlay, onEdit, on
       </div>
 
       <div className="rounded-xl border border-border/40 bg-card p-5">
-        <h3 className="text-sm font-semibold text-title mb-3">歌词</h3>
-        <div className="max-h-60 overflow-y-auto lyrics-scroll">
-          <pre className="text-sm text-body-secondary whitespace-pre-wrap font-sans leading-relaxed">
-            {lyrics}
-          </pre>
+        <div className="flex items-center justify-between mb-1">
+          <button
+            className="flex items-center gap-1.5 cursor-pointer text-sm font-semibold text-title hover:text-primary transition-colors"
+            onClick={() => setLyricsOpen(!lyricsOpen)}
+          >
+            {lyricsOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+            歌词
+          </button>
+          <button
+            className="flex items-center gap-1.5 cursor-pointer text-xs text-body-secondary hover:text-title transition-colors"
+            onClick={() => {
+              navigator.clipboard.writeText(lyrics);
+              toast.success("歌词已复制到剪贴板");
+            }}
+          >
+            <Copy className="h-3.5 w-3.5" />
+            复制
+          </button>
         </div>
+        {lyricsOpen && (
+          <div className="max-h-60 overflow-y-auto lyrics-scroll mt-3">
+            <pre className="text-sm text-body-secondary whitespace-pre-wrap font-sans leading-relaxed">
+              {lyrics}
+            </pre>
+          </div>
+        )}
       </div>
     </div>
   );

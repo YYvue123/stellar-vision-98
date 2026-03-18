@@ -111,16 +111,22 @@ export const TrackDetail = ({ track, isGenerating, isPlaying, onPlay, onEdit, on
             {lyricsOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
             歌词
           </button>
-          <button
-            className="flex items-center gap-1.5 cursor-pointer text-xs text-body-secondary hover:text-title transition-colors"
-            onClick={() => {
-              navigator.clipboard.writeText(lyrics);
-              toast.success("歌词已复制到剪贴板");
-            }}
-          >
-            <Copy className="h-3.5 w-3.5" />
-            复制
-          </button>
+          <TooltipProvider delayDuration={300}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  className="flex items-center justify-center h-7 w-7 rounded-md cursor-pointer text-body-secondary hover:text-title hover:bg-hover-bg transition-colors"
+                  onClick={() => {
+                    navigator.clipboard.writeText(lyrics);
+                    toast.success("歌词已复制到剪贴板");
+                  }}
+                >
+                  <Copy className="h-4 w-4" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>复制</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
         {lyricsOpen && (
           <div className="max-h-60 overflow-y-auto lyrics-scroll mt-3">

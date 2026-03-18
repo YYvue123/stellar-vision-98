@@ -217,6 +217,7 @@ const AIAudio = () => {
               tab={promptTab}
               setTab={setPromptTab}
               onSubmit={handleCreate}
+              pureMusic={pureMusic}
             />
           </div>
 

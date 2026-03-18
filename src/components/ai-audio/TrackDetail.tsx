@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Play, Pause, Pencil, Download, Music, Headphones, Monitor, ChevronDown, ChevronUp, Copy } from "lucide-react";
 import { toast } from "sonner";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 
 export interface TrackDetailData {

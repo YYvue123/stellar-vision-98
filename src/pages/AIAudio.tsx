@@ -193,7 +193,14 @@ const AIAudio = () => {
             <div className="flex items-center justify-between">
               <span className="text-sm font-bold text-foreground">生成纯音乐</span>
               <button
-                onClick={() => setPureMusic(!pureMusic)}
+                onClick={() => {
+                  const next = !pureMusic;
+                  setPureMusic(next);
+                  if (next && promptTab === "lyrics") {
+                    setTextInput("");
+                    setPromptTab("idea");
+                  }
+                }}
                 className={`relative h-6 w-11 cursor-pointer rounded-full transition-colors duration-200 ${pureMusic ? 'bg-primary' : 'bg-border'}`}
               >
                 <span className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-primary-foreground shadow transition-transform duration-200 ${pureMusic ? 'translate-x-5' : 'translate-x-0'}`} />

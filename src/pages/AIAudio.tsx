@@ -12,6 +12,7 @@ import { HistorySidebar, HistoryTrack, mockHistory } from "@/components/ai-audio
 import { TrackDetail, TrackDetailData } from "@/components/ai-audio/TrackDetail";
 import { EditTrackDialog } from "@/components/ai-audio/EditTrackDialog";
 import cover1 from "@/assets/cover1.jpg";
+import cover2 from "@/assets/cover2.jpg";
 
 export interface Track {
   id: string;

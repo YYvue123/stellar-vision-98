@@ -222,7 +222,7 @@ const AIAudio = () => {
           </div>
 
           {/* Right column */}
-          <div className="flex flex-1 flex-col lg:overflow-y-auto lg:scrollbar-thin p-4 md:p-6">
+          <div id="track-detail-area" className="flex flex-1 flex-col lg:overflow-y-auto lg:scrollbar-thin p-4 md:p-6">
             {(isGenerating || detailTrack) ? (
               <div className="w-full max-w-[1056px] mx-auto flex flex-1 flex-col">
                 <TrackDetail

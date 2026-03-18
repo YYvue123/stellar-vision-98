@@ -55,7 +55,7 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
   const isLyricsDisabled = pureMusic && tab === "lyrics";
   const maxLen = tab === "lyrics" ? 3000 : 200;
   const optimizerLabel = tab === "lyrics" ? "歌词优化器" : "创意优化器";
-  const canCreate = styleInput.trim().length > 0 && textInput.trim().length > 0 && !isOptimizing;
+  const canCreate = textInput.trim().length > 0 && !isOptimizing;
 
   const handleOptimize = () => {
     if (!textInput.trim()) return;

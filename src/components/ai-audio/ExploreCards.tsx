@@ -158,11 +158,9 @@ export const ExploreCards = ({ onPlay, onCreateFrom, currentTrack, isPlaying, is
               </div>
               <p className="text-sm font-medium text-title">{c.title}</p>
               <p className="mt-0.5 text-xs text-body-caption">{c.desc}</p>
-              <div className="absolute inset-0 flex items-center justify-center rounded-xl">
-                <span className="rounded-full bg-card-secondary/90 px-3 py-1 text-xs font-medium text-body-secondary shadow-sm">
-                  即将推出
-                </span>
-              </div>
+              <span className="mt-2 inline-block rounded-full bg-card-secondary/90 px-3 py-1 text-xs font-medium text-body-secondary shadow-sm">
+                即将推出
+              </span>
             </div>
           ))}
         </div>

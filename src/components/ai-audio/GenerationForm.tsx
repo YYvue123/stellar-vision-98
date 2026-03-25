@@ -112,7 +112,7 @@ export const GenerationForm = ({ styleInput, textInput, setTextInput, isOptimizi
                   ? "你想唱什么？写下你的感受、故事或句子——我会把它变成歌词！🎨"
                   : "在这里输入歌词内容..."
             }
-            className="w-full resize-vertical bg-transparent text-sm text-title placeholder:text-body-caption focus:outline-none prompt-textarea-scroll disabled:cursor-not-allowed"
+            className="w-full resize-vertical bg-transparent text-base text-title placeholder:text-body-caption focus:outline-none prompt-textarea-scroll disabled:cursor-not-allowed"
           />
           <div className="mt-2 flex items-center justify-between text-xs text-body-caption">
             <div className="flex items-center gap-1.5">
